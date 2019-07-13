@@ -1,4 +1,4 @@
-from typing import Any, Union
+from typing import Any, Optional, Union
 from urllib.parse import SplitResult, parse_qsl, urlsplit
 
 from .types import Serializable, Version
@@ -28,3 +28,13 @@ class Cache:
 class CacheURL:
     def __init__(self, url: Union[str, "DatabaseURL"]):
         self._url = str(url)
+
+    @property
+    def components(self) -> SplitResult:
+        if not hasattr(self, "_components"):
+            self._components = urlsplit(self._url)
+        return self._components
+
+    @property
+    def backend(self) -> str:
+        return self.components.scheme

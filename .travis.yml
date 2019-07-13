@@ -1,0 +1,21 @@
+dist: xenial
+language: python
+python:
+  - 3.6
+  - 3.7
+services:
+  - redis-server
+install:
+  - pip install -e .
+  - pip install -r requirements-dev.txt
+script:
+  - pytest --cov=caches --cov=tests
+after_success:
+  - codecov
+matrix:
+  include:
+    - python: 3.7
+      script:
+        - pylint caches tests setup.py
+        - mypy caches --ignore-missing-imports
+        - black --check .
