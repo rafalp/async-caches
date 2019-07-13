@@ -1,9 +1,14 @@
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
+from ..core import CacheURL
 from ..types import Serializable, Version
 
 
 class BaseBackend:
+    def __init__(self, cache_url: Union[CacheURL, str], **options: typing.Any):
+        self._cache_url = CacheURL(cache_url)
+        self._options = options
+
     async def connect(self):
         raise NotImplementedError()
 
