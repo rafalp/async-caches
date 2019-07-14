@@ -10,7 +10,7 @@ from .base import BaseBackend
 
 
 class RedisBackend(BaseBackend):
-    _pool: Optional[aioredis.RedisConnection]
+    _pool: aioredis.RedisConnection
 
     def __init__(self, cache_url: Union[CacheURL, str], **options: Any) -> None:
         self._cache_url = CacheURL(cache_url)
@@ -36,8 +36,8 @@ class RedisBackend(BaseBackend):
         if self._options.get("loop") is not None:
             kwargs["loop"] = self._options["loop"]
 
-        if not kwargs.get("loop"):
-            kwargs["loop"] = asyncio.get_event_loop()
+        if kwargs.get("loop") is None:
+            kwargs["loop"] = asyncio.get_event_loop()  # type: ignore
 
         return kwargs
 

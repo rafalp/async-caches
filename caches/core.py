@@ -29,7 +29,7 @@ class Cache:
         self.key_prefix = key_prefix or url_options.get("key_prefix", "")
 
         if self.timeout is None and url_options.get("timeout") is not None:
-            self.timeout = int(url_options.get("timeout"))
+            self.timeout = int(url_options["timeout"])
 
         self.options = options
         self.is_connected = False
