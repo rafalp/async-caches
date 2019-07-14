@@ -17,11 +17,20 @@ class DummyBackend(BaseBackend):
         return default
 
     async def set(
-        self, key: str, value: Serializable, *, timeout: Optional[int]
+        self,
+        key: str,
+        value: Serializable,
+        *,
+        timeout: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:
         json.dumps(value)
 
-    async def add(self, key: str, value: Serializable, *, timeout: Optional[int]):
+    async def add(self,
+        key: str,
+        value: Serializable,
+        *,
+        timeout: Optional[int],  # pylint: disable=unused-argument
+    ):
         json.dumps(value)
 
     async def get_or_set(
@@ -42,7 +51,10 @@ class DummyBackend(BaseBackend):
         return {key: None for key in keys}
 
     async def set_many(
-        self, mapping: Mapping[str, Serializable], *, timeout: Optional[int]
+        self,
+        mapping: Mapping[str, Serializable],
+        *,
+        timeout: Optional[int],  # pylint: disable=unused-argument
     ):
         for value in mapping.values():
             json.dumps(value)
