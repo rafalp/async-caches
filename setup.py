@@ -21,12 +21,15 @@ setup(
     name="caches",
     author="Rafał Pitoń",
     author_email="kontakt@rpiton",
-    description="Async caching library inspired by django.core.caches.",
+    description=(
+        "Caching library reimplementing django.core.cache with async support and "
+        "type hints, inspired by encode/databases."
+    ),
     long_description=README,
     long_description_content_type="text/markdown",
     license="BSD",
     version="0.1.0",
-    url="https://github.com/rafalp/caches",
+    url="https://github.com/rafalp/async-caches",
     packages=["caches"],
     include_package_data=True,
     install_requires=["aioredis>=1.2.0"],
