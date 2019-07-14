@@ -1,5 +1,4 @@
 import json
-
 from time import time
 from typing import Any, Dict, Iterable, Mapping, Optional, Tuple, Union
 
@@ -82,6 +81,8 @@ class LocMemBackend(BaseBackend):
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
         if key not in self._caches[self._id]:
             raise ValueError(f"'{key}' is not set in the cache")
+        if not isinstance(delta, (float, int)):
+            raise ValueError(f"incr value must be int or float")
 
         value, timeout = self._caches[self._id][key]
         value = json.loads(value) + delta
@@ -91,6 +92,8 @@ class LocMemBackend(BaseBackend):
     async def decr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
         if key not in self._caches[self._id]:
             raise ValueError(f"'{key}' is not set in the cache")
+        if not isinstance(delta, (float, int)):
+            raise ValueError(f"decr value must be int or float")
 
         value, timeout = self._caches[self._id][key]
         value = json.loads(value) - delta

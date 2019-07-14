@@ -22,6 +22,12 @@ async def test_set_key_can_be_list(cache):
 
 
 @pytest.mark.asyncio
+async def test_set_key_can_be_unicode_str(cache):
+    await cache.set("test", "łóć")
+    assert await cache.get("test") == "łóć"
+
+
+@pytest.mark.asyncio
 async def test_key_can_be_versioned(cache):
     await cache.set("test", "Ok!", version=1)
     await cache.set("test", "Nope!", version=2)
