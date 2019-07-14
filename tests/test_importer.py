@@ -24,6 +24,11 @@ def test_importer_raises_error_is_module_cant_be_imported():
         import_from_string("not_existing_d76a8:Cache")
 
 
-def test_importer_raises_error_is_attributecant_be_imported():
+def test_importer_raises_error_is_attribute_cant_be_imported():
     with pytest.raises(ImportFromStringError):
         import_from_string("caches.core:Undefined")
+
+
+def test_importer_handles_import_time_error(mocker):
+    with pytest.raises(ImportFromStringError):
+        import_from_string("modulewithexception:Undefined")
