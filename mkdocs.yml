@@ -1,0 +1,18 @@
+site_name: Async Caches
+site_description: Caching library reimplementing django.core.cache with async support and type hints, inspired by encode/databases.
+
+theme:
+    name: 'material'
+
+repo_name: rafalp/async-caches
+repo_url: https://github.com/rafalp/async-caches
+# edit_uri: ""
+
+nav:
+    - Introduction: 'index.md'
+    - Backends: 'backends.md'
+    - API: 'api.md'
+
+markdown_extensions:
+  - admonition
+  - codehilite

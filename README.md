@@ -8,7 +8,7 @@ Caching library reimplementing [`django.core.cache` API](https://docs.djangoproj
 Currently three cache backends are available:
 
 * `dummy` - Dummy cache backend that doesn't cache anything. Used to disable caching in tests!
-* `locmem` - Cache backend that stores data in thread's memory. Lets you develop and test caching without need to setup and maintin cache server.
+* `locmem` - Cache backend that stores data in local memory. Lets you develop and test caching without need for actual cache server.
 * `redis` - Redis cache intended for use in actual deployments.
 
 **Requirements:** Python 3.6+
