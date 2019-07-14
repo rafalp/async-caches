@@ -25,7 +25,8 @@ class DummyBackend(BaseBackend):
     ) -> Any:
         json.dumps(value)
 
-    async def add(self,
+    async def add(
+        self,
         key: str,
         value: Serializable,
         *,

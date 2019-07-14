@@ -52,7 +52,7 @@ String with cache key to set.
 
 ##### `value`
 
-JSON-serializable value to store in cache
+JSON-serializable value to store in cache.
 
 
 #### Optional arguments
