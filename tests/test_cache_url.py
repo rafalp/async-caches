@@ -46,6 +46,16 @@ def test_none_is_returned_for_database_if_its_not_set():
     assert url.database is None
 
 
+def test_options_are_taken_from_url_querystring():
+    url = CacheURL("redis://localhost/0?minsize=5&key_prefix=test")
+    assert url.options == {"minsize": "5", "key_prefix": "test"}
+
+
+def test_options_are_empty_dict_if_url_has_no_querystring():
+    url = CacheURL("redis://localhost/0")
+    assert url.options == {}
+
+
 def test_url_obj_can_be_converted_back_to_str():
     url_str = "redis://localhost:6379"
     url = CacheURL(url_str)
