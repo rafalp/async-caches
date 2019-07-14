@@ -767,7 +767,17 @@
                 <h1 id="api-reference">API reference</h1>
 <h2 id="cache"><code>Cache</code></h2>
 <h3 id="connect"><code>connect</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Connects cache to server.</p>
 <h3 id="disconnect"><code>disconnect</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Disconnects cache from server.</p>
 <h3 id="get"><code>get</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
@@ -807,49 +817,68 @@
 </pre></div>
 
 
+<p>Sets new key in the cache. Does nothing if key already exists.</p>
 <h3 id="get_or_set"><code>get_or_set</code></h3>
-<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_or_set</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_or_set</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 
 
+<p>Gets value for key from the cache. If key doesn't exist, it is set with <code>default</code> value.</p>
 <h3 id="get_many"><code>get_many</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_many</span><span class="p">(</span><span class="n">keys</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </pre></div>
 
 
+<p>Gets values for many keys from the cache in single read operation.</p>
 <h3 id="set_many"><code>set_many</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set_many</span><span class="p">(</span><span class="n">mapping</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Serializable</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
 
 
+<p>Sets values for many keys in the cache in single write operation.</p>
+<blockquote>
+<p><strong>Note:</strong> if timeout argument is provided, second command will be ran to set keys expiration time on the cache server.</p>
+</blockquote>
 <h3 id="delete"><code>delete</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
 
 
+<p>Deletes key from the cache.</p>
 <h3 id="delete_many"><code>delete_many</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">delete_many</span><span class="p">(</span><span class="n">keys</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
 
 
+<p>Deletes many keys from the cache.</p>
 <h3 id="clear"><code>clear</code></h3>
-<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
 
 
+<p>Deletes all keys from the cache.</p>
+<blockquote>
+<p><strong>Note:</strong> <code>cache.clear()</code> will remove all keys from cache, not just ones set by your application.</p>
+<p>Be careful when calling it, if your app shares Redis database with other clients.</p>
+</blockquote>
 <h3 id="touch"><code>touch</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
 
+<p>Updates expiration time for the key.</p>
 <h3 id="incr"><code>incr</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 </pre></div>
 
 
+<p>Increases key in the cache by a value.</p>
 <h3 id="decr"><code>decr</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">decr</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 </pre></div>
+
+
+<p>Increases key in the cache by a value.</p>
                 
                   
                 
