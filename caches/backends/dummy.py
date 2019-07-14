@@ -23,7 +23,11 @@ class DummyBackend(BaseBackend):
         pass
 
     async def get_or_set(
-        self, key: str, default: Any, *, timeout: Optional[int]
+        self,
+        key: str,
+        default: Any,
+        *,
+        timeout: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:
         return default
 
