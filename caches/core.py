@@ -1,4 +1,3 @@
-from time import time
 from typing import Any, Dict, Iterable, Mapping, Optional, Union
 from urllib.parse import SplitResult, urlsplit
 
@@ -56,9 +55,9 @@ class Cache:
 
     def make_timeout(self, timeout: Optional[int] = None) -> Optional[int]:
         if timeout is not None:
-            return int(time()) + timeout
+            return timeout
         if self.timeout is not None:
-            return int(time()) + self.timeout
+            return self.timeout
         return None
 
     async def get(

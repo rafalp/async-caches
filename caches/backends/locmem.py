@@ -33,6 +33,8 @@ class LocMemBackend(BaseBackend):
     async def set(
         self, key: str, value: Serializable, *, timeout: Optional[int]
     ) -> Any:
+        if timeout is not None:
+            timeout += int(time())
         self._caches[self._id][key] = json.dumps(value), timeout
 
     async def add(self, key: str, value: Serializable, *, timeout: Optional[int]):
@@ -70,6 +72,8 @@ class LocMemBackend(BaseBackend):
     async def touch(self, key: str, timeout: Optional[int]) -> bool:
         if key not in self._caches[self._id]:
             return False
+        if timeout is not None:
+            timeout += int(time())
 
         value, _ = self._caches[self._id][key]
         self._caches[self._id][key] = value, timeout
