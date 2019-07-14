@@ -33,11 +33,6 @@ class RedisBackend(BaseBackend):
             kwargs["minsize"] = int(self._options["minsize"])
         if self._options.get("maxsize") is not None:
             kwargs["maxsize"] = int(self._options["maxsize"])
-        if self._options.get("loop") is not None:
-            kwargs["loop"] = self._options["loop"]
-
-        if kwargs.get("loop") is None:
-            kwargs["loop"] = asyncio.get_event_loop()  # type: ignore
 
         return kwargs
 
