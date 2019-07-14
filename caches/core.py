@@ -1,4 +1,5 @@
-from typing import Any, Dict, Iterable, Mapping, Optional, Union
+from types import TracebackType
+from typing import Any, Dict, Iterable, Mapping, Optional, Type, Union
 from urllib.parse import SplitResult, parse_qsl, urlsplit
 
 from .importer import import_from_string
@@ -58,6 +59,18 @@ class Cache:
         assert self.is_connected, "Already disconnected."
         await self._backend.disconnect()
         self.is_connected = False
+
+    async def __aenter__(self) -> "Database":
+        await self.connect()
+        return self
+
+    async def __aexit__(
+        self,
+        exc_type: Type[BaseException] = None,
+        exc_value: BaseException = None,
+        traceback: TracebackType = None,
+    ) -> None:
+        await self.disconnect()
 
     def make_key(self, key: str, version: Optional[Version] = None) -> str:
         return "%s:%s:%s" % (self.key_prefix, version or self.version, key)

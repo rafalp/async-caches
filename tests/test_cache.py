@@ -94,3 +94,10 @@ def test_cache_can_be_set_default_timeout_in_url():
 def test_cache_default_timeout_can_be_overrided_per_key():
     cache = Cache("dummy://null", timeout=600)
     assert cache.make_timeout(120) == 120
+
+
+@pytest.mark.asyncio
+async def test_cache_can_be_used_as_context_manager():
+    async with Cache("locmem://") as cache:
+        await cache.set("test", "Ok!")
+        assert await cache.get("test") == "Ok!"
