@@ -1,3 +1,5 @@
+import asyncio
+
 import pytest
 
 
@@ -205,6 +207,15 @@ async def test_touch_updates_expired_key_timeout(cache):
     await cache.set("test", "Ok!", timeout=0)
     assert await cache.touch("test", 10) is True
     assert await cache.get("test") == "Ok!"
+
+
+@pytest.mark.asyncio
+async def test_touch_expires_key_if_timeout_is_0(cache):
+    await cache.set("test", "Ok!", timeout=10)
+    assert await cache.get("test") == "Ok!"
+    assert await cache.touch("test", 0) is True
+    await asyncio.sleep(1)
+    assert await cache.get("test") is None
 
 
 @pytest.mark.asyncio

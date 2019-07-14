@@ -221,6 +221,15 @@ async def test_touch_updates_expired_key_timeout(cache):
 
 
 @pytest.mark.asyncio
+async def test_touch_expires_key_if_timeout_is_0(cache):
+    await cache.set("test", "Ok!", timeout=10)
+    assert await cache.get("test") == "Ok!"
+    assert await cache.touch("test", 0) is True
+    await asyncio.sleep(1)
+    assert await cache.get("test") is None
+
+
+@pytest.mark.asyncio
 async def test_touch_does_nothing_for_nonexistant_key(cache):
     assert await cache.touch("undefined", 10) is False
     assert await cache.get("undefined") is None
