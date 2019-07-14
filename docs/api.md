@@ -4,8 +4,20 @@
 
 ### `connect`
 
+```python
+await cache.connect()
+```
+
+Connects cache to server.
+
 
 ### `disconnect`
+
+```python
+await cache.disconnect()
+```
+
+Disconnects cache from server.
 
 
 ### `get`
@@ -83,12 +95,16 @@ Defaults to `None`, unless default version for set for the cache.
 await cache.add(key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None)
 ```
 
+Sets new key in the cache. Does nothing if key already exists.
+
 
 ### `get_or_set`
 
 ```python
-await cache.get_or_set(key: str, default: Any, *, timeout: Optional[int] = None, version: Optional[Version] = None) -> Any
+await cache.get_or_set(key: str, default: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None) -> Any
 ```
+
+Gets value for key from the cache. If key doesn't exist, it is set with `default` value.
 
 
 ### `get_many`
@@ -97,12 +113,18 @@ await cache.get_or_set(key: str, default: Any, *, timeout: Optional[int] = None,
 await cache.get_many(keys: Iterable[str], version: Optional[Version] = None) -> Dict[str, Any]
 ```
 
+Gets values for many keys from the cache in single read operation.
+
 
 ### `set_many`
 
 ```python
 await cache.set_many(mapping: Mapping[str, Serializable], *, timeout: Optional[int] = None)
 ```
+
+Sets values for many keys in the cache in single write operation.
+
+> **Note:** if timeout argument is provided, second command will be ran to set keys expiration time on the cache server.
 
 
 ### `delete`
@@ -111,6 +133,8 @@ await cache.set_many(mapping: Mapping[str, Serializable], *, timeout: Optional[i
 await cache.delete(key: str, version: Optional[Version] = None)
 ```
 
+Deletes key from the cache.
+
 
 ### `delete_many`
 
@@ -118,12 +142,20 @@ await cache.delete(key: str, version: Optional[Version] = None)
 await cache.delete_many(keys: Iterable[str], version: Optional[Version] = None)
 ```
 
+Deletes many keys from the cache.
+
 
 ### `clear`
 
 ```python
-await cache.clear(self)
+await cache.clear()
 ```
+
+Deletes all keys from the cache.
+
+> **Note:** `cache.clear()` will remove all keys from cache, not just ones set by your application.
+>
+> Be careful when calling it, if your app shares Redis database with other clients.
 
 
 ### `touch`
@@ -132,6 +164,8 @@ await cache.clear(self)
 await cache.touch(key: str, timeout: Optional[int] = None, *, version: Optional[Version] = None) -> bool
 ```
 
+Updates expiration time for the key.
+
 
 ### `incr`
 
@@ -139,9 +173,13 @@ await cache.touch(key: str, timeout: Optional[int] = None, *, version: Optional[
 await cache.incr(key: str, delta: Union[float, int] = 1, *, version: Optional[Version] = None) -> Union[float, int]
 ```
 
+Increases key in the cache by a value.
+
 
 ### `decr`
 
 ```python
 await cache.decr(key: str, delta: Union[float, int] = 1, *, version: Optional[Version] = None) -> Union[float, int]
 ```
+
+Increases key in the cache by a value.
