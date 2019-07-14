@@ -321,6 +321,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#return-value" title="Return value" class="md-nav__link">
+    Return value
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -412,6 +419,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#return-value" title="Return value" class="md-nav__link">
+    Return value
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -438,7 +452,7 @@
                 
                 <h1 id="api-reference">API reference</h1>
 <h2 id="get"><code>get</code></h2>
-<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 
 
@@ -452,6 +466,8 @@
 <h4 id="version"><code>version</code></h4>
 <p>Version of key that should be returned. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version for set for the cache.</p>
+<h3 id="return-value">Return value</h3>
+<p>Returns value that was set in cache or <code>default</code> if key wasn't found in cache, or has expired.</p>
                 
                   
                 
