@@ -145,6 +145,7 @@ async def test_many_keys_can_be_set_with_timeout(cache):
     assert await cache.get("test") is None
     assert await cache.get("hello") is None
 
+
 @pytest.mark.asyncio
 async def test_set_key_can_be_deleted(cache):
     await cache.set("test", "Ok!")

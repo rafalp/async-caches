@@ -10,6 +10,7 @@ from .base import BaseBackend
 
 class RedisBackend(BaseBackend):
     async def connect(self):
+        # pylint: disable=attribute-defined-outside-init
         self._pool = await aioredis.create_pool(
             str(self._cache_url), minsize=5, maxsize=10, loop=asyncio.get_event_loop()
         )
@@ -79,10 +80,9 @@ class RedisBackend(BaseBackend):
     async def touch(self, key: str, timeout: Optional[int]) -> bool:
         if timeout is None:
             return bool(await self._pool.execute("persist", key))
-        elif timeout:
+        if timeout:
             return bool(await self._pool.execute("expire", key, timeout))
-        else:
-            return bool(await self._pool.execute("unlink", key))
+        return bool(await self._pool.execute("unlink", key))
 
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
         if not await self._pool.execute("exists", key):
