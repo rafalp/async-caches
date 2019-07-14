@@ -4,23 +4,30 @@ from caches import Cache
 
 
 def test_locmem_cache_can_be_initialized_without_net_loc():
-    cache = Cache("locmem://")
+    Cache("locmem://")
 
 
 def test_locmem_cache_can_be_initialized_with_net_loc():
-    cache = Cache("locmem://primary")
+    Cache("locmem://primary")
 
 
 def test_locmem_cache_can_be_initialized_with_key_prefix():
-    cache = Cache("locmem://", key_prefix="test")
+    Cache("locmem://", key_prefix="test")
 
 
 def test_locmem_cache_can_be_initialized_with_timeout():
-    cache = Cache("locmem://", timeout=600)
+    Cache("locmem://", timeout=600)
 
 
 def test_locmem_cache_can_be_initialized_with_version():
+    Cache("locmem://", version=20)
+
+
+@pytest.mark.asyncio
+async def test_locmem_cache_can_be_connected_and_disconnected():
     cache = Cache("locmem://", version=20)
+    await cache.connect()
+    await cache.disconnect()
 
 
 @pytest.mark.asyncio
