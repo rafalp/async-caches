@@ -275,6 +275,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#connect" title="connect" class="md-nav__link">
+    connect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disconnect" title="disconnect" class="md-nav__link">
+    disconnect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get" title="get" class="md-nav__link">
     get
   </a>
@@ -398,6 +412,76 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add" title="add" class="md-nav__link">
+    add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_or_set" title="get_or_set" class="md-nav__link">
+    get_or_set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_many" title="get_many" class="md-nav__link">
+    get_many
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_many" title="set_many" class="md-nav__link">
+    set_many
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" title="delete" class="md-nav__link">
+    delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete_many" title="delete_many" class="md-nav__link">
+    delete_many
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" title="clear" class="md-nav__link">
+    clear
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touch" title="touch" class="md-nav__link">
+    touch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incr" title="incr" class="md-nav__link">
+    incr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decr" title="decr" class="md-nav__link">
+    decr
+  </a>
   
 </li>
         
@@ -446,6 +530,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#connect" title="connect" class="md-nav__link">
+    connect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disconnect" title="disconnect" class="md-nav__link">
+    disconnect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get" title="get" class="md-nav__link">
     get
   </a>
@@ -572,6 +670,76 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#add" title="add" class="md-nav__link">
+    add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_or_set" title="get_or_set" class="md-nav__link">
+    get_or_set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_many" title="get_many" class="md-nav__link">
+    get_many
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_many" title="set_many" class="md-nav__link">
+    set_many
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" title="delete" class="md-nav__link">
+    delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete_many" title="delete_many" class="md-nav__link">
+    delete_many
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" title="clear" class="md-nav__link">
+    clear
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touch" title="touch" class="md-nav__link">
+    touch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incr" title="incr" class="md-nav__link">
+    incr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decr" title="decr" class="md-nav__link">
+    decr
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -598,12 +766,14 @@
                 
                 <h1 id="api-reference">API reference</h1>
 <h2 id="cache"><code>Cache</code></h2>
+<h3 id="connect"><code>connect</code></h3>
+<h3 id="disconnect"><code>disconnect</code></h3>
 <h3 id="get"><code>get</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 
 
-<p>Gets value for key from cache.</p>
+<p>Gets value for key from the cache.</p>
 <h4 id="required-arguments">Required arguments</h4>
 <h5 id="key"><code>key</code></h5>
 <p>String with cache key to read.</p>
@@ -619,12 +789,12 @@
 </pre></div>
 
 
-<p>Sets new value for key in cache. If key doesn't exist it will be created. </p>
+<p>Sets new value for key in the cache. If key doesn't exist it will be created. </p>
 <h4 id="required-arguments_1">Required arguments</h4>
 <h5 id="key_1"><code>key</code></h5>
 <p>String with cache key to set.</p>
 <h5 id="value"><code>value</code></h5>
-<p>JSON-serializable value to store in cache</p>
+<p>JSON-serializable value to store in the cache.</p>
 <h4 id="optional-arguments_1">Optional arguments</h4>
 <h5 id="timeout"><code>timeout</code></h5>
 <p>Integer with number of seconds after which key will expire and will be removed by the cache. </p>
@@ -632,6 +802,54 @@
 <h5 id="version_1"><code>version</code></h5>
 <p>Version of key that should be set. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version for set for the cache.</p>
+<h3 id="add"><code>add</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="get_or_set"><code>get_or_set</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_or_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</pre></div>
+
+
+<h3 id="get_many"><code>get_many</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_many</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
+
+<h3 id="set_many"><code>set_many</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set_many</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Serializable</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="delete"><code>delete</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="delete_many"><code>delete_many</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">delete_many</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="clear"><code>clear</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="touch"><code>touch</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</pre></div>
+
+
+<h3 id="incr"><code>incr</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+</pre></div>
+
+
+<h3 id="decr"><code>decr</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">decr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+</pre></div>
                 
                   
                 
