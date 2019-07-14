@@ -8,6 +8,18 @@ async def test_set_key_can_be_get(cache):
 
 
 @pytest.mark.asyncio
+async def test_set_key_can_be_dict(cache):
+    await cache.set("test", {"hello": "world"})
+    assert await cache.get("test") == {"hello": "world"}
+
+
+@pytest.mark.asyncio
+async def test_set_key_can_be_list(cache):
+    await cache.set("test", ["hello", "world"])
+    assert await cache.get("test") == ["hello", "world"]
+
+
+@pytest.mark.asyncio
 async def test_key_can_be_versioned(cache):
     await cache.set("test", "Ok!", version=1)
     await cache.set("test", "Nope!", version=2)

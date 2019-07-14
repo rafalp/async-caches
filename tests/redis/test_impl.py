@@ -18,6 +18,18 @@ async def test_key_can_be_versioned(cache):
 
 
 @pytest.mark.asyncio
+async def test_set_key_can_be_dict(cache):
+    await cache.set("test", {"hello": "world"})
+    assert await cache.get("test") == {"hello": "world"}
+
+
+@pytest.mark.asyncio
+async def test_set_key_can_be_list(cache):
+    await cache.set("test", ["hello", "world"])
+    assert await cache.get("test") == ["hello", "world"]
+
+
+@pytest.mark.asyncio
 async def test_none_is_returned_for_expired_key(cache):
     await cache.set("test", "Ok!", timeout=0)
     assert await cache.get("test") is None
