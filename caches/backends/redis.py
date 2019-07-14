@@ -1,5 +1,5 @@
 from .base import BaseBackend
 
 
-class ResidBackend(BaseBackend):
+class RedisBackend(BaseBackend):
     pass
