@@ -19,10 +19,10 @@ class DummyBackend(BaseBackend):
     async def set(
         self, key: str, value: Serializable, *, timeout: Optional[int]
     ) -> Any:
-        json.dump(value)
+        json.dumps(value)
 
     async def add(self, key: str, value: Serializable, *, timeout: Optional[int]):
-        json.dump(value)
+        json.dumps(value)
 
     async def get_or_set(
         self,
@@ -35,7 +35,7 @@ class DummyBackend(BaseBackend):
             default = default()
             if isawaitable(default):
                 default = await default
-            json.dump(default)
+            json.dumps(default)
         return default
 
     async def get_many(self, keys: Iterable[str]) -> Dict[str, Any]:
@@ -45,7 +45,7 @@ class DummyBackend(BaseBackend):
         self, mapping: Mapping[str, Serializable], *, timeout: Optional[int]
     ):
         for value in mapping.values():
-            json.dump(value)
+            json.dumps(value)
 
     async def delete(self, key: str):
         pass
