@@ -39,30 +39,67 @@ class RedisBackend(BaseBackend):
     async def get_or_set(
         self, key: str, default: Any, *, timeout: Optional[int]
     ) -> Any:
-        raise NotImplementedError()
+        value = await self.get(key, None)
+        if value is None:
+            await self.set(key, default, timeout=timeout)
+            return default
+        return value
 
     async def get_many(self, keys: Iterable[str]) -> Dict[str, Any]:
-        raise NotImplementedError()
+        values = await self._pool.execute("mget", *keys)
+        return {
+            key: json.loads(values[i]) if values[i] is not None else None
+            for i, key in enumerate(keys)
+        }
 
     async def set_many(
         self, mapping: Mapping[str, Serializable], *, timeout: Optional[int]
     ):
-        raise NotImplementedError()
+        if timeout is None or timeout:
+            values = []
+            for key, value in mapping.items():
+                values.append(key)
+                values.append(json.dumps(value))
+            await self._pool.execute("mset", *values)
+        if timeout:
+            expire = []
+            for key in mapping:
+                expire.append(self._pool.execute("expire", key, timeout))
+            await asyncio.gather(*expire)
 
     async def delete(self, key: str):
-        raise NotImplementedError()
+        await self._pool.execute("unlink", key)
 
     async def delete_many(self, keys: Iterable[str]):
-        raise NotImplementedError()
+        await self._pool.execute("unlink", *keys)
 
     async def clear(self):
         await self._pool.execute("flushdb", "async")
 
     async def touch(self, key: str, timeout: Optional[int]) -> bool:
-        raise NotImplementedError()
+        if timeout is None:
+            return bool(await self._pool.execute("persist", key))
+        elif timeout:
+            return bool(await self._pool.execute("expire", key, timeout))
+        else:
+            return bool(await self._pool.execute("unlink", key))
 
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
-        raise NotImplementedError()
+        if not await self._pool.execute("exists", key):
+            raise ValueError(f"'{key}' is not set in the cache")
+        if isinstance(delta, int):
+            return await self._pool.execute("incrby", key, delta)
+        if isinstance(delta, float):
+            return json.loads(await self._pool.execute("incrbyfloat", key, delta))
+        raise ValueError(f"decr value must be int or float")
 
     async def decr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
-        raise NotImplementedError()
+        if not await self._pool.execute("exists", key):
+            raise ValueError(f"'{key}' is not set in the cache")
+        if isinstance(delta, int):
+            return await self._pool.execute("incrby", key, delta * -1)
+        if isinstance(delta, float):
+            return json.loads(
+                await self._pool.execute("incrbyfloat", key, delta * -1.0)
+            )
+        raise ValueError(f"decr value must be int or float")
