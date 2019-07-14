@@ -267,6 +267,14 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#cache" title="Cache" class="md-nav__link">
+    Cache
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#get" title="get" class="md-nav__link">
     get
   </a>
@@ -330,6 +338,25 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serializable" title="Serializable" class="md-nav__link">
+    Serializable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version_1" title="Version" class="md-nav__link">
+    Version
+  </a>
   
 </li>
       
@@ -365,6 +392,14 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#cache" title="Cache" class="md-nav__link">
+    Cache
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#get" title="get" class="md-nav__link">
     get
   </a>
@@ -430,6 +465,25 @@
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serializable" title="Serializable" class="md-nav__link">
+    Serializable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version_1" title="Version" class="md-nav__link">
+    Version
+  </a>
+  
+</li>
       
       
       
@@ -451,23 +505,28 @@
                 
                 
                 <h1 id="api-reference">API reference</h1>
-<h2 id="get"><code>get</code></h2>
+<h2 id="cache"><code>Cache</code></h2>
+<h3 id="get"><code>get</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 
 
-<h3 id="required-arguments">Required arguments</h3>
-<h4 id="key"><code>key</code></h4>
+<h4 id="required-arguments">Required arguments</h4>
+<h5 id="key"><code>key</code></h5>
 <p>String with cache key to read.</p>
-<h3 id="optional-arguments">Optional arguments</h3>
-<h4 id="default"><code>default</code></h4>
+<h4 id="optional-arguments">Optional arguments</h4>
+<h5 id="default"><code>default</code></h5>
 <p>Default value that should be returned if key doesn't exist in the cache, or has expired.</p>
 <p>Defaults to <code>None</code>.</p>
-<h4 id="version"><code>version</code></h4>
+<h5 id="version"><code>version</code></h5>
 <p>Version of key that should be returned. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version for set for the cache.</p>
-<h3 id="return-value">Return value</h3>
+<h4 id="return-value">Return value</h4>
 <p>Returns value that was set in cache or <code>default</code> if key wasn't found in cache, or has expired.</p>
+<h2 id="serializable"><code>Serializable</code></h2>
+<p>JSON-serializable value: string, integer, float, bool, dict, list or any combination of those.</p>
+<h2 id="version_1"><code>Version</code></h2>
+<p>String or integer.</p>
                 
                   
                 
