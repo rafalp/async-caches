@@ -248,9 +248,91 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        API
+      </label>
+    
     <a href="./" title="API" class="md-nav__link md-nav__link--active">
       API
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get" title="get" class="md-nav__link">
+    get
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-arguments" title="Required arguments" class="md-nav__link">
+    Required arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key" title="key" class="md-nav__link">
+    key
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments" title="Optional arguments" class="md-nav__link">
+    Optional arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default" title="default" class="md-nav__link">
+    default
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" title="version" class="md-nav__link">
+    version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -272,6 +354,75 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get" title="get" class="md-nav__link">
+    get
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-arguments" title="Required arguments" class="md-nav__link">
+    Required arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key" title="key" class="md-nav__link">
+    key
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments" title="Optional arguments" class="md-nav__link">
+    Optional arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default" title="default" class="md-nav__link">
+    default
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" title="version" class="md-nav__link">
+    version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -286,6 +437,21 @@
                 
                 
                 <h1 id="api-reference">API reference</h1>
+<h2 id="get"><code>get</code></h2>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="required-arguments">Required arguments</h3>
+<h4 id="key"><code>key</code></h4>
+<p>String with cache key to read.</p>
+<h3 id="optional-arguments">Optional arguments</h3>
+<h4 id="default"><code>default</code></h4>
+<p>Default value that should be returned if key doesn't exist in the cache, or has expired.</p>
+<p>Defaults to <code>None</code>.</p>
+<h4 id="version"><code>version</code></h4>
+<p>Version of key that should be returned. String or integer.</p>
+<p>Defaults to <code>None</code>, unless default version for set for the cache.</p>
                 
                   
                 
