@@ -23,11 +23,13 @@ class BaseBackend:
     ) -> Any:
         raise NotImplementedError()
 
-    async def add(self, key: str, value: Serializable, *, timeout: Optional[int]):
+    async def add(
+        self, key: str, value: Serializable, *, timeout: Optional[int]
+    ) -> bool:
         raise NotImplementedError()
 
     async def get_or_set(
-        self, key: str, default: Any, *, timeout: Optional[int]
+        self, key: str, default: Serializable, *, timeout: Optional[int]
     ) -> Any:
         raise NotImplementedError()
 

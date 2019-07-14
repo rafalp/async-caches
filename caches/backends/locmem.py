@@ -37,12 +37,16 @@ class LocMemBackend(BaseBackend):
             timeout += int(time())
         self._caches[self._id][key] = json.dumps(value), timeout
 
-    async def add(self, key: str, value: Serializable, *, timeout: Optional[int]):
+    async def add(
+        self, key: str, value: Serializable, *, timeout: Optional[int]
+    ) -> bool:
         if key not in self._caches[self._id]:
             await self.set(key, value, timeout=timeout)
+            return True
+        return False
 
     async def get_or_set(
-        self, key: str, default: Any, *, timeout: Optional[int]
+        self, key: str, default: Serializable, *, timeout: Optional[int]
     ) -> Any:
         value = await self.get(key, None)
         if value is None:

@@ -31,13 +31,14 @@ class DummyBackend(BaseBackend):
         value: Serializable,
         *,
         timeout: Optional[int],  # pylint: disable=unused-argument
-    ):
+    ) -> bool:
         json.dumps(value)
+        return False
 
     async def get_or_set(
         self,
         key: str,
-        default: Any,
+        default: Serializable,
         *,
         timeout: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:

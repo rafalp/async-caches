@@ -118,7 +118,7 @@ class Cache:
     async def get_or_set(
         self,
         key: str,
-        default: Any,
+        default: Serializable,
         *,
         timeout: Optional[int] = None,
         version: Optional[Version] = None,

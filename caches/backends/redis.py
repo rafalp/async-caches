@@ -62,12 +62,16 @@ class RedisBackend(BaseBackend):
 
     async def add(self, key: str, value: Serializable, *, timeout: Optional[int]):
         if timeout is None:
-            await self._pool.execute("SET", key, json.dumps(value), "NX")
+            return bool(await self._pool.execute("SET", key, json.dumps(value), "NX"))
         elif timeout:
-            await self._pool.execute("SET", key, json.dumps(value), "EX", timeout, "NX")
+            return bool(
+                await self._pool.execute(
+                    "SET", key, json.dumps(value), "EX", timeout, "NX"
+                )
+            )
 
     async def get_or_set(
-        self, key: str, default: Any, *, timeout: Optional[int]
+        self, key: str, default: Serializable, *, timeout: Optional[int]
     ) -> Any:
         value = await self.get(key, None)
         if value is None:
