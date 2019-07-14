@@ -329,9 +329,64 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#return-value" title="Return value" class="md-nav__link">
-    Return value
+  <a href="#set" title="set" class="md-nav__link">
+    set
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-arguments_1" title="Required arguments" class="md-nav__link">
+    Required arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key_1" title="key" class="md-nav__link">
+    key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" title="value" class="md-nav__link">
+    value
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments_1" title="Optional arguments" class="md-nav__link">
+    Optional arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#timeout" title="timeout" class="md-nav__link">
+    timeout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version_1" title="version" class="md-nav__link">
+    version
   </a>
   
 </li>
@@ -345,18 +400,9 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#serializable" title="Serializable" class="md-nav__link">
-    Serializable
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#version_1" title="Version" class="md-nav__link">
-    Version
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -454,9 +500,64 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#return-value" title="Return value" class="md-nav__link">
-    Return value
+  <a href="#set" title="set" class="md-nav__link">
+    set
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-arguments_1" title="Required arguments" class="md-nav__link">
+    Required arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key_1" title="key" class="md-nav__link">
+    key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" title="value" class="md-nav__link">
+    value
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments_1" title="Optional arguments" class="md-nav__link">
+    Optional arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#timeout" title="timeout" class="md-nav__link">
+    timeout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version_1" title="version" class="md-nav__link">
+    version
   </a>
   
 </li>
@@ -470,18 +571,9 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#serializable" title="Serializable" class="md-nav__link">
-    Serializable
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#version_1" title="Version" class="md-nav__link">
-    Version
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -511,6 +603,7 @@
 </pre></div>
 
 
+<p>Gets value for key from cache.</p>
 <h4 id="required-arguments">Required arguments</h4>
 <h5 id="key"><code>key</code></h5>
 <p>String with cache key to read.</p>
@@ -521,12 +614,24 @@
 <h5 id="version"><code>version</code></h5>
 <p>Version of key that should be returned. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version for set for the cache.</p>
-<h4 id="return-value">Return value</h4>
-<p>Returns value that was set in cache or <code>default</code> if key wasn't found in cache, or has expired.</p>
-<h2 id="serializable"><code>Serializable</code></h2>
-<p>JSON-serializable value: string, integer, float, bool, dict, list or any combination of those.</p>
-<h2 id="version_1"><code>Version</code></h2>
-<p>String or integer.</p>
+<h3 id="set"><code>set</code></h3>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Sets new value for key in cache. If key doesn't exist it will be created. </p>
+<h4 id="required-arguments_1">Required arguments</h4>
+<h5 id="key_1"><code>key</code></h5>
+<p>String with cache key to set.</p>
+<h5 id="value"><code>value</code></h5>
+<p>JSON-serializable value to store in cache</p>
+<h4 id="optional-arguments_1">Optional arguments</h4>
+<h5 id="timeout"><code>timeout</code></h5>
+<p>Integer with number of seconds after which key will expire and will be removed by the cache. </p>
+<p>Defaults to <code>None</code> (cache forever), unless default timeout is set for cache.</p>
+<h5 id="version_1"><code>version</code></h5>
+<p>Version of key that should be set. String or integer.</p>
+<p>Defaults to <code>None</code>, unless default version for set for the cache.</p>
                 
                   
                 
