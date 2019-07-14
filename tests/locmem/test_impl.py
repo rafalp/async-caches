@@ -214,7 +214,7 @@ async def test_touch_expires_key_if_timeout_is_0(cache):
     await cache.set("test", "Ok!", timeout=10)
     assert await cache.get("test") == "Ok!"
     assert await cache.touch("test", 0) is True
-    await asyncio.sleep(1)
+    await asyncio.sleep(2)
     assert await cache.get("test") is None
 
 
