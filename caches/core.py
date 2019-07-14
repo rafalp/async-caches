@@ -63,6 +63,7 @@ class Cache:
     async def get(
         self, key: str, default: Any = None, *, version: Optional[Version] = None
     ) -> Any:
+        """Gets key value from cache, or default if key was not found or expired."""
         key_ = self.make_key(key, version)
         return await self._backend.get(key_, default)
 
@@ -74,6 +75,7 @@ class Cache:
         timeout: Optional[int] = None,
         version: Optional[Version] = None,
     ) -> Any:
+        """Sets value for key in cache."""
         key_ = self.make_key(key, version)
         timeout_ = self.make_timeout(timeout)
         await self._backend.set(key_, value, timeout=timeout_)
@@ -86,6 +88,7 @@ class Cache:
         timeout: Optional[int] = None,
         version: Optional[Version] = None,
     ):
+        """Sets value for key in cache, but only if key wasn't already set."""
         key_ = self.make_key(key, version)
         timeout_ = self.make_timeout(timeout)
         await self._backend.add(key_, value, timeout=timeout_)
@@ -98,6 +101,8 @@ class Cache:
         timeout: Optional[int] = None,
         version: Optional[Version] = None,
     ) -> Any:
+        """Gets key value from cache, or default if key was not found or expired.
+        If key was not found in the cache, it will be set with default value."""
         key_ = self.make_key(key, version)
         timeout_ = self.make_timeout(timeout)
         return await self._backend.get_or_set(key_, default, timeout=timeout_)
@@ -105,6 +110,8 @@ class Cache:
     async def get_many(
         self, keys: Iterable[str], version: Optional[Version] = None
     ) -> Dict[str, Any]:
+        """Gets values for specified keys from cache. If key didn't exist or was
+        expired, its value will be None."""
         keys_ = {key: self.make_key(key, version) for key in keys}
         values = await self._backend.get_many(list(keys_.values()))
         return {key: values[keys_[key]] for key in keys}
@@ -112,19 +119,23 @@ class Cache:
     async def set_many(
         self, mapping: Mapping[str, Serializable], *, timeout: Optional[int] = None
     ):
+        """Sets values for specified keys in cache."""
         mapping_ = {self.make_key(key): mapping[key] for key in mapping}
         timeout_ = self.make_timeout(timeout)
         await self._backend.set_many(mapping_, timeout=timeout_)
 
     async def delete(self, key: str, version: Optional[Version] = None):
+        """Deletes specified key from cache."""
         key_ = self.make_key(key, version)
         await self._backend.delete(key_)
 
     async def delete_many(self, keys: Iterable[str], version: Optional[Version] = None):
+        """Deletes specified keys from cache."""
         keys_ = [self.make_key(key, version) for key in keys]
         await self._backend.delete_many(keys_)
 
     async def clear(self):
+        """Deletes all keys from cache."""
         await self._backend.clear()
 
     async def touch(
@@ -134,6 +145,7 @@ class Cache:
         *,
         version: Optional[Version] = None,
     ) -> bool:
+        """Updates key's expiration time in cache."""
         key_ = self.make_key(key, version)
         timeout_ = self.make_timeout(timeout)
         return await self._backend.touch(key_, timeout_)
@@ -145,6 +157,7 @@ class Cache:
         *,
         version: Optional[Version] = None,
     ) -> Union[float, int]:
+        """Increases key value in cache by delta. Defaults to '1'."""
         key_ = self.make_key(key, version)
         return await self._backend.incr(key_, delta)
 
@@ -155,6 +168,7 @@ class Cache:
         *,
         version: Optional[Version] = None,
     ) -> Union[float, int]:
+        """Decreases key value in cache by delta. Defaults to '1'."""
         key_ = self.make_key(key, version)
         return await self._backend.decr(key_, delta)
 
