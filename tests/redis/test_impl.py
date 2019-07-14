@@ -118,6 +118,22 @@ async def test_key_get_or_set_overwrites_expired_key(cache):
 
 
 @pytest.mark.asyncio
+async def test_key_get_or_set_callable_default_is_called(cache):
+    def default():
+        return "Ok!"
+
+    assert await cache.get_or_set("test", default) == "Ok!"
+
+
+@pytest.mark.asyncio
+async def test_key_get_or_set_async_callable_default_is_called_and_awaited(cache):
+    async def default():
+        return "Ok!"
+
+    assert await cache.get_or_set("test", default) == "Ok!"
+
+
+@pytest.mark.asyncio
 async def test_many_keys_can_be_get(cache):
     await cache.set("test", "Ok!")
     await cache.set("hello", "world")

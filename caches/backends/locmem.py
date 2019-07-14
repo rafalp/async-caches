@@ -1,4 +1,5 @@
 import json
+from inspect import isawaitable
 from time import time
 from typing import Any, Dict, Iterable, Mapping, Optional, Tuple, Union
 
@@ -45,6 +46,10 @@ class LocMemBackend(BaseBackend):
     ) -> Any:
         value = await self.get(key, None)
         if value is None:
+            if callable(default):
+                default = default()
+                if isawaitable(default):
+                    default = await default
             await self.set(key, default, timeout=timeout)
             return default
         return value

@@ -1,3 +1,4 @@
+from inspect import isawaitable
 from typing import Any, Dict, Iterable, Mapping, Optional, Union
 
 from ..types import Serializable
@@ -29,6 +30,10 @@ class DummyBackend(BaseBackend):
         *,
         timeout: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:
+        if callable(default):
+            default = default()
+            if isawaitable(default):
+                default = await default
         return default
 
     async def get_many(self, keys: Iterable[str]) -> Dict[str, Any]:

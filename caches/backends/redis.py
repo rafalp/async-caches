@@ -1,5 +1,6 @@
 import asyncio
 import json
+from inspect import isawaitable
 from typing import Any, Dict, Iterable, Mapping, Optional, Union
 
 import aioredis
@@ -70,6 +71,10 @@ class RedisBackend(BaseBackend):
     ) -> Any:
         value = await self.get(key, None)
         if value is None:
+            if callable(default):
+                default = default()
+                if isawaitable(default):
+                    default = await default
             await self.set(key, default, timeout=timeout)
             return default
         return value
