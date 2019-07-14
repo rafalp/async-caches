@@ -29,6 +29,6 @@ def test_importer_raises_error_is_attribute_cant_be_imported():
         import_from_string("caches.core:Undefined")
 
 
-def test_importer_handles_import_time_error():
+def test_importer_reraises_child_modules_import_errors():
     with pytest.raises(ModuleNotFoundError):
         import_from_string("tests.modulewithexception:Undefined")
