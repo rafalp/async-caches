@@ -60,7 +60,7 @@ class Cache:
         await self._backend.disconnect()
         self.is_connected = False
 
-    async def __aenter__(self) -> "Database":
+    async def __aenter__(self) -> "Cache":
         await self.connect()
         return self
 
