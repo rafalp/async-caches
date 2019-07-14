@@ -238,6 +238,13 @@ async def test_increasing_undefined_key_raises_value_error(cache):
 
 
 @pytest.mark.asyncio
+async def test_increasing_key_by_non_numeric_delta_raises_value_error(cache):
+    await cache.set("test", 10.0)
+    with pytest.raises(ValueError):
+        await cache.incr("test", "invalid")
+
+
+@pytest.mark.asyncio
 async def test_set_key_can_be_decreased(cache):
     await cache.set("test", 10)
     assert await cache.decr("test") == 9
@@ -259,3 +266,10 @@ async def test_set_key_can_be_decreased_by_float_value(cache):
 async def test_decreasing_undefined_key_raises_value_error(cache):
     with pytest.raises(ValueError):
         await cache.decr("test")
+
+
+@pytest.mark.asyncio
+async def test_decreasing_key_by_non_numeric_delta_raises_value_error(cache):
+    await cache.set("test", 10.0)
+    with pytest.raises(ValueError):
+        await cache.decr("test", "invalid")
