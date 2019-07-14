@@ -20,7 +20,7 @@ with open(README_PATH, "r") as f:
 setup(
     name="async-caches",
     author="Rafał Pitoń",
-    author_email="kontakt@rpiton",
+    author_email="kontakt@rpiton.com",
     description=(
         "Caching library reimplementing django.core.cache with async support and "
         "type hints, inspired by encode/databases."
