@@ -1,3 +1,4 @@
+import json
 from inspect import isawaitable
 from typing import Any, Dict, Iterable, Mapping, Optional, Union
 
@@ -18,10 +19,10 @@ class DummyBackend(BaseBackend):
     async def set(
         self, key: str, value: Serializable, *, timeout: Optional[int]
     ) -> Any:
-        pass
+        json.dump(value)
 
     async def add(self, key: str, value: Serializable, *, timeout: Optional[int]):
-        pass
+        json.dump(value)
 
     async def get_or_set(
         self,
@@ -34,6 +35,7 @@ class DummyBackend(BaseBackend):
             default = default()
             if isawaitable(default):
                 default = await default
+            json.dump(default)
         return default
 
     async def get_many(self, keys: Iterable[str]) -> Dict[str, Any]:
@@ -42,7 +44,8 @@ class DummyBackend(BaseBackend):
     async def set_many(
         self, mapping: Mapping[str, Serializable], *, timeout: Optional[int]
     ):
-        pass
+        for value in mapping.values():
+            json.dump(value)
 
     async def delete(self, key: str):
         pass
