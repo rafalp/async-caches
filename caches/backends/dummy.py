@@ -49,7 +49,7 @@ class DummyBackend(BaseBackend):
         pass
 
     async def touch(self, key: str, timeout: Optional[int]) -> bool:
-        return True
+        return False
 
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
         raise ValueError(f"'{key}' is not set in the cache")
