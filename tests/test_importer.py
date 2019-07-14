@@ -30,5 +30,5 @@ def test_importer_raises_error_is_attribute_cant_be_imported():
 
 
 def test_importer_handles_import_time_error():
-    with pytest.raises(ImportFromStringError):
-        import_from_string("modulewithexception:Undefined")
+    with pytest.raises(ModuleNotFoundError):
+        import_from_string("tests.modulewithexception:Undefined")
