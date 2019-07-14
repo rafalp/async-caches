@@ -1,14 +1,14 @@
 import json
 
 from time import time
-from typing import Any, Dict, Iterable, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, Mapping, Optional, Tuple, Union
 
 from ..types import Serializable
 from .base import BaseBackend
 
 
 class LocMemBackend(BaseBackend):
-    _caches = {}
+    _caches: Dict[str, Dict[str, Tuple[Any, Optional[int]]]] = {}
 
     async def connect(self):
         # pylint: disable=attribute-defined-outside-init
@@ -24,7 +24,7 @@ class LocMemBackend(BaseBackend):
         if key not in self._caches[self._id]:
             return default
 
-        value, timeout = self._caches[self._id].get(key)
+        value, timeout = self._caches[self._id][key]
         if timeout and timeout < time():
             return default
 

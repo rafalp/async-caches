@@ -161,7 +161,7 @@ class Cache:
 
 
 class CacheURL:
-    def __init__(self, url: Union[str, "DatabaseURL"]):
+    def __init__(self, url: Union[str, "CacheURL"]):
         self._url = str(url)
 
     @property
@@ -188,7 +188,7 @@ class CacheURL:
         return self.components.netloc or None
 
     @property
-    def database(self) -> str:
+    def database(self) -> Optional[str]:
         path = self.components.path
         if path.startswith("/"):
             path = path[1:]
