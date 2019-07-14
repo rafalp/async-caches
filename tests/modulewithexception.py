@@ -1,1 +1,1 @@
-raise ValueError("Test exception!")  # pragma: no cover
+import nonexisting65f4r  # pragma: no cover
