@@ -1,5 +1,5 @@
 from typing import Any, Dict, Iterable, Mapping, Optional, Union
-from urllib.parse import SplitResult, urlsplit
+from urllib.parse import SplitResult, parse_qsl, urlsplit
 
 from .importer import import_from_string
 from .types import Serializable, Version
@@ -19,11 +19,19 @@ class Cache:
         timeout: Optional[int] = None,
         version: Optional[Version] = None,
         key_prefix: str = "",
+        **options: Any,
     ):
         self.url = CacheURL(url)
+
+        url_options = self.url.options
         self.timeout = timeout
-        self.version = version or ""
-        self.key_prefix = key_prefix
+        self.version = version or url_options.get("version", "")
+        self.key_prefix = key_prefix or url_options.get("key_prefix", "")
+
+        if self.timeout is None and url_options.get("timeout") is not None:
+            self.timeout = int(url_options.get("timeout"))
+
+        self.options = options
         self.is_connected = False
 
         assert self.url.backend in self.SUPPORTED_BACKENDS, "Invalid backend."
@@ -38,6 +46,7 @@ class Cache:
             timeout=self.timeout,
             version=self.version,
             key_prefix=self.key_prefix,
+            **options,
         )
 
     async def connect(self) -> None:
@@ -206,6 +215,13 @@ class CacheURL:
         if path.startswith("/"):
             path = path[1:]
         return path or None
+
+    @property
+    def options(self) -> dict:
+        if not hasattr(self, "_options"):
+            # pylint: disable=attribute-defined-outside-init
+            self._options = dict(parse_qsl(self.components.query))
+        return self._options
 
     def __str__(self) -> str:
         return self._url

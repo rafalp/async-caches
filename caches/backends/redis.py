@@ -5,19 +5,50 @@ from typing import Any, Dict, Iterable, Mapping, Optional, Union
 import aioredis
 
 from ..types import Serializable
+from ..core import CacheURL
 from .base import BaseBackend
 
 
 class RedisBackend(BaseBackend):
-    _pool: aioredis.RedisConnection
+    _pool: Optional[aioredis.RedisConnection]
+
+    def __init__(self, cache_url: Union[CacheURL, str], **options: Any) -> None:
+        self._cache_url = CacheURL(cache_url)
+        self._options = options
+        self._pool = None
+
+    def _get_connection_kwargs(self) -> dict:
+        url_options = self._cache_url.options
+
+        kwargs = {}
+        minsize = url_options.get("minsize")
+        maxsize = url_options.get("maxsize")
+
+        if minsize is not None:
+            kwargs["minsize"] = int(minsize)
+        if maxsize is not None:
+            kwargs["maxsize"] = int(maxsize)
+
+        if self._options.get("minsize") is not None:
+            kwargs["minsize"] = int(self._options["minsize"])
+        if self._options.get("maxsize") is not None:
+            kwargs["maxsize"] = int(self._options["maxsize"])
+        if self._options.get("loop") is not None:
+            kwargs["loop"] = self._options["loop"]
+
+        if not kwargs.get("loop"):
+            kwargs["loop"] = asyncio.get_event_loop()
+
+        return kwargs
 
     async def connect(self):
         # pylint: disable=attribute-defined-outside-init
-        self._pool = await aioredis.create_pool(
-            str(self._cache_url), minsize=5, maxsize=10, loop=asyncio.get_event_loop()
-        )
+        assert self._pool is None, "Cache backend is already running"
+        kwargs = self._get_connection_kwargs()
+        self._pool = await aioredis.create_pool(str(self._cache_url), **kwargs)
 
     async def disconnect(self):
+        assert self._pool is not None, "Cache backend is not running"
         self._pool.close()
         await self._pool.wait_closed()
 
