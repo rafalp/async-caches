@@ -18,7 +18,7 @@ with open(README_PATH, "r") as f:
     README = f.read()
 
 setup(
-    name="caches",
+    name="async-caches",
     author="Rafał Pitoń",
     author_email="kontakt@rpiton",
     description=(
