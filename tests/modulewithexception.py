@@ -1,2 +1,1 @@
-# pragma: no cover
-raise ValueError("Test exception!")
+raise ValueError("Test exception!")  # pragma: no cover
