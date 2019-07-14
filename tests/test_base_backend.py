@@ -23,7 +23,7 @@ async def test_base_backend_doesnt_implement_connecting(cache):
 @pytest.mark.asyncio
 async def test_base_backend_doesnt_implement_disconnecting(cache):
     with pytest.raises(NotImplementedError):
-        await cache.connect()
+        await cache.disconnect()
 
 
 @pytest.mark.asyncio
