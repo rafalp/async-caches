@@ -2,6 +2,12 @@
 
 ## `Cache`
 
+### `connect`
+
+
+### `disconnect`
+
+
 ### `get`
 
 ```python
@@ -37,7 +43,7 @@ Defaults to `None`, unless default version for set for the cache.
 ### `set`
 
 ```python
-await cache.set(self, key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None)
+await cache.set(key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None)
 ```
 
 Sets new value for key in the cache. If key doesn't exist it will be created. 
@@ -74,42 +80,42 @@ Defaults to `None`, unless default version for set for the cache.
 ### `add`
 
 ```python
-await cache.add(self, key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None)
+await cache.add(key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None)
 ```
 
 
 ### `get_or_set`
 
 ```python
-await cache.get_or_set(self, key: str, default: Any, *, timeout: Optional[int] = None, version: Optional[Version] = None) -> Any
+await cache.get_or_set(key: str, default: Any, *, timeout: Optional[int] = None, version: Optional[Version] = None) -> Any
 ```
 
 
 ### `get_many`
 
 ```python
-await cache.get_many(self, keys: Iterable[str], version: Optional[Version] = None) -> Dict[str, Any]
+await cache.get_many(keys: Iterable[str], version: Optional[Version] = None) -> Dict[str, Any]
 ```
 
 
 ### `set_many`
 
 ```python
-await cache.set_many(self, mapping: Mapping[str, Serializable], *, timeout: Optional[int] = None)
+await cache.set_many(mapping: Mapping[str, Serializable], *, timeout: Optional[int] = None)
 ```
 
 
 ### `delete`
 
 ```python
-await cache.delete(self, key: str, version: Optional[Version] = None)
+await cache.delete(key: str, version: Optional[Version] = None)
 ```
 
 
 ### `delete_many`
 
 ```python
-await cache.delete_many(self, keys: Iterable[str], version: Optional[Version] = None)
+await cache.delete_many(keys: Iterable[str], version: Optional[Version] = None)
 ```
 
 
@@ -123,19 +129,19 @@ await cache.clear(self)
 ### `touch`
 
 ```python
-await cache.touch(self, key: str, timeout: Optional[int] = None, *, version: Optional[Version] = None) -> bool
+await cache.touch(key: str, timeout: Optional[int] = None, *, version: Optional[Version] = None) -> bool
 ```
 
 
 ### `incr`
 
 ```python
-await cache.incr(self, key: str, delta: Union[float, int] = 1, *, version: Optional[Version] = None) -> Union[float, int]
+await cache.incr(key: str, delta: Union[float, int] = 1, *, version: Optional[Version] = None) -> Union[float, int]
 ```
 
 
 ### `decr`
 
 ```python
-await cache.decr(self, key: str, delta: Union[float, int] = 1, *, version: Optional[Version] = None) -> Union[float, int]
+await cache.decr(key: str, delta: Union[float, int] = 1, *, version: Optional[Version] = None) -> Union[float, int]
 ```
