@@ -49,7 +49,7 @@ Defaults to `None`.
 
 Version of key that should be returned. String or integer.
 
-Defaults to `None`, unless default version for set for the cache.
+Defaults to `None`, unless default version is set for the cache.
 
 
 ### `set`
@@ -86,7 +86,7 @@ Defaults to `None` (cache forever), unless default timeout is set for cache.
 
 Version of key that should be set. String or integer.
 
-Defaults to `None`, unless default version for set for the cache.
+Defaults to `None`, unless default version is set for the cache.
 
 
 ### `add`
@@ -123,7 +123,7 @@ Defaults to `None` (cache forever), unless default timeout is set for cache.
 
 Version of key that should be set. String or integer.
 
-Defaults to `None`, unless default version for set for the cache.
+Defaults to `None`, unless default version is set for the cache.
 
 
 ### `get_or_set`
@@ -162,7 +162,7 @@ Defaults to `None` (cache forever), unless default timeout is set for cache.
 
 Version of key that should be get (or set). String or integer.
 
-Defaults to `None`, unless default version for set for the cache.
+Defaults to `None`, unless default version is set for the cache.
 
 
 ### `get_many`
@@ -187,7 +187,7 @@ List or tuple of string with cache keys to read.
 
 Version of keys that should be get from the cache. String or integer.
 
-Defaults to `None`, unless default version for set for the cache.
+Defaults to `None`, unless default version is set for the cache.
 
 
 ### Return value
@@ -212,7 +212,23 @@ Sets values for many keys in the cache in single write operation.
 await cache.delete(key: str, version: Optional[Version] = None)
 ```
 
-Deletes key from the cache.
+Deletes the key from the cache. Does nothing if the key doesn't exist.
+
+
+#### Required arguments
+
+##### `key`
+
+Key to delete from cache.
+
+
+#### Optional arguments
+
+##### `version`
+
+Version of key that should be deleted from the cache. String or integer.
+
+Defaults to `None`, unless default version is set for the cache.
 
 
 ### `delete_many`
@@ -221,7 +237,23 @@ Deletes key from the cache.
 await cache.delete_many(keys: Iterable[str], version: Optional[Version] = None)
 ```
 
-Deletes many keys from the cache.
+Deletes many keys from the cache. Skips keys that don't exist.
+
+
+#### Required arguments
+
+##### `keys`
+
+Keys to delete from cache.
+
+
+#### Optional arguments
+
+##### `version`
+
+Version of keys that should be deleted from the cache. String or integer.
+
+Defaults to `None`, unless default version is set for the cache.
 
 
 ### `clear`
@@ -246,13 +278,36 @@ await cache.touch(key: str, timeout: Optional[int] = None, *, version: Optional[
 Updates expiration time for the key.
 
 
+#### Required arguments
+
+##### `key`
+
+String with cache key which timeout value should be updated.
+
+
+#### Optional arguments
+
+##### `timeout`
+
+Integer with number of seconds after which update key will expire and will be removed by the cache.
+
+Defaults to `None` (cache forever), unless default timeout is set for cache.
+
+
+##### `version`
+
+Version of key that should be update. String or integer.
+
+Defaults to `None`, unless default version is set for the cache.
+
+
 ### `incr`
 
 ```python
 await cache.incr(key: str, delta: Union[float, int] = 1, *, version: Optional[Version] = None) -> Union[float, int]
 ```
 
-Increases key in the cache by a value.
+Increases the value stored for specified key by specified amount.
 
 
 ### `decr`
@@ -261,4 +316,4 @@ Increases key in the cache by a value.
 await cache.decr(key: str, delta: Union[float, int] = 1, *, version: Optional[Version] = None) -> Union[float, int]
 ```
 
-Increases key in the cache by a value.
+Decreases the value stored for specified key by specified amount.
