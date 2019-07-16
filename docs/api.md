@@ -77,7 +77,7 @@ JSON-serializable value to store in the cache.
 
 ##### `timeout`
 
-Integer with number of seconds after which key will expire and will be removed by the cache. 
+Integer with number of seconds after which set key will expire and will be removed by the cache.
 
 Defaults to `None` (cache forever), unless default timeout is set for cache.
 
@@ -95,7 +95,35 @@ Defaults to `None`, unless default version for set for the cache.
 await cache.add(key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None)
 ```
 
-Sets new key in the cache. Does nothing if key already exists.
+Sets key in the cache if it doesn't already exist, or has expired.
+
+
+#### Required arguments
+
+##### `key`
+
+String with cache key to set.
+
+
+##### `value`
+
+JSON-serializable value to store in the cache.
+
+
+#### Optional arguments
+
+##### `timeout`
+
+Integer with number of seconds after which set key will expire and will be removed by the cache. 
+
+Defaults to `None` (cache forever), unless default timeout is set for cache.
+
+
+##### `version`
+
+Version of key that should be set. String or integer.
+
+Defaults to `None`, unless default version for set for the cache.
 
 
 ### `get_or_set`
@@ -104,7 +132,37 @@ Sets new key in the cache. Does nothing if key already exists.
 await cache.get_or_set(key: str, default: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None) -> Any
 ```
 
-Gets value for key from the cache. If key doesn't exist, it is set with `default` value.
+Gets value for key from the cache. If key doesn't exist or has expired, new key is set with `default` value.
+
+
+#### Required arguments
+
+##### `key`
+
+String with cache key to read or set.
+
+
+##### `default`
+
+Default value that should be returned if key doesn't exist in the cache, or has expired. It has to be JSON-serializable and will be set in cache if read didn't return the value.
+
+If `default` is callable, it will be called and it's return value will be set in cache.
+
+
+#### Optional arguments
+
+##### `timeout`
+
+Integer with number of seconds after which set key will expire and will be removed by the cache. 
+
+Defaults to `None` (cache forever), unless default timeout is set for cache.
+
+
+##### `version`
+
+Version of key that should be get (or set). String or integer.
+
+Defaults to `None`, unless default version for set for the cache.
 
 
 ### `get_many`
@@ -114,6 +172,27 @@ await cache.get_many(keys: Iterable[str], version: Optional[Version] = None) -> 
 ```
 
 Gets values for many keys from the cache in single read operation.
+
+
+#### Required arguments
+
+##### `keys`
+
+List or tuple of string with cache keys to read.
+
+
+#### Optional arguments
+
+##### `version`
+
+Version of keys that should be get from the cache. String or integer.
+
+Defaults to `None`, unless default version for set for the cache.
+
+
+### Return value
+
+Returns dict of cache-returned values. If any of keys didn't exist in the cache or was expired, it's value will be as `None`.
 
 
 ### `set_many`
