@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/rafalp/async-caches.svg?branch=master)](https://travis-ci.org/rafalp/async-caches)
 [![Codecov](https://codecov.io/gh/rafalp/async-caches/branch/master/graph/badge.svg)](https://codecov.io/gh/rafalp/async-caches)
 [![PyPI](https://img.shields.io/badge/release-0.1-green.svg)](https://pypi.org/project/async-caches/)
-[![Documentation](https://img.shields.io/badge/documentation-blue.svg)](https://rafalp.github.io/async-caches/)
+[![Documentation](https://img.shields.io/badge/documentation-github-blue.svg)](https://rafalp.github.io/async-caches/)
 
 Caching library reimplementing [`django.core.cache` API](https://docs.djangoproject.com/en/2.2/topics/cache/#the-low-level-cache-api) with async support and type hints, inspired by [`encode/databases`](https://github.com/encode/databases).
 
