@@ -24,6 +24,13 @@ $ pip install async-caches
 ```
 
 
+## Contributing
+
+Contributions are welcome!
+
+If you've found a bug, got idea, question or just want to share the love, open [GitHub issue](https://github.com/rafalp/async-caches/issues) or pull request!
+
+
 ## Credits and license
 
 This is free software and you are welcome to modify and redistribute it under the conditions described in the license. For the complete license, refer to the LICENSE file.
