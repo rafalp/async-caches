@@ -115,9 +115,7 @@ class RedisBackend(BaseBackend):
     async def touch(self, key: str, timeout: Optional[int]) -> bool:
         if timeout is None:
             return bool(await self._pool.execute("PERSIST", key))
-        if timeout:
-            return bool(await self._pool.execute("EXPIRE", key, timeout))
-        return bool(await self._pool.execute("UNLINK", key))
+        return bool(await self._pool.execute("EXPIRE", key, timeout))
 
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
         if not await self._pool.execute("EXISTS", key):
