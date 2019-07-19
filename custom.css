@@ -1,0 +1,12 @@
+/* Make code stand out more */
+.md-typeset code {
+  padding: .2rem .4rem;
+  background-color: #ffe8e7 !important;
+  box-shadow: none;
+  color: #d60000;
+}
+
+/* Hide crazy deep navs */
+.md-nav__list .md-nav__list .md-nav__list {
+  display: none;
+}
