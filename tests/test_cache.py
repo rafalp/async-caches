@@ -96,6 +96,22 @@ def test_cache_default_timeout_can_be_overrided_per_key():
     assert cache.make_timeout(120) == 120
 
 
+def test_cache_errors_if_timeout_option_is_set_to_0():
+    with pytest.raises(ValueError):
+        Cache("dummy://null", timeout=0)
+
+
+def test_cache_errors_if_timeout_option_in_url_is_set_to_0():
+    with pytest.raises(ValueError):
+        Cache("dummy://null?timeout=0")
+
+
+def test_cache_errors_if_key_timeout_is_set_to_0():
+    cache = Cache("dummy://null")
+    with pytest.raises(ValueError):
+        assert cache.make_timeout(0)
+
+
 @pytest.mark.asyncio
 async def test_cache_can_be_used_as_context_manager():
     async with Cache("locmem://") as cache:

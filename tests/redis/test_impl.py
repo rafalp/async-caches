@@ -37,7 +37,8 @@ async def test_key_can_be_versioned(cache):
 
 @pytest.mark.asyncio
 async def test_none_is_returned_for_expired_key(cache):
-    await cache.set("test", "Ok!", timeout=0)
+    await cache.set("test", "Ok!", timeout=1)
+    await asyncio.sleep(2)
     assert await cache.get("test") is None
 
 
@@ -54,7 +55,8 @@ async def test_none_is_returned_for_nonexistant_version(cache):
 
 @pytest.mark.asyncio
 async def test_default_is_returned_for_expired_key(cache):
-    await cache.set("test", "Ok!", timeout=0)
+    await cache.set("test", "Ok!", timeout=1)
+    await asyncio.sleep(2)
     assert await cache.get("text", "default") == "default"
 
 
@@ -245,15 +247,6 @@ async def test_touch_updates_expired_key_timeout(cache):
     assert await cache.touch("test", 10) is True
     await asyncio.sleep(2)
     assert await cache.get("test") == "Ok!"
-
-
-@pytest.mark.asyncio
-async def test_touch_expires_key_if_timeout_is_0(cache):
-    await cache.set("test", "Ok!", timeout=10)
-    assert await cache.get("test") == "Ok!"
-    assert await cache.touch("test", 0) is True
-    await asyncio.sleep(2)
-    assert await cache.get("test") is None
 
 
 @pytest.mark.asyncio

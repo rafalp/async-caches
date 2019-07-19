@@ -90,7 +90,7 @@ async def test_clearing_is_noop(cache):
 
 @pytest.mark.asyncio
 async def test_touch_is_noop_for_set_key(cache):
-    await cache.set("test", "Ok!", timeout=0)
+    await cache.set("test", "Ok!", timeout=10)
     assert await cache.touch("test") is False
 
 

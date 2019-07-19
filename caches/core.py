@@ -32,6 +32,12 @@ class Cache:
         if self.timeout is None and url_options.get("timeout") is not None:
             self.timeout = int(url_options["timeout"])
 
+        if timeout == 0 or self.timeout == 0:
+            raise ValueError(
+                "'timeout' option can't be set to 0. "
+                "If you want cache keys to never expire, set it to 'None'."
+            )
+
         self.options = options
         self.is_connected = False
 
@@ -76,6 +82,11 @@ class Cache:
         return "%s:%s:%s" % (self.key_prefix, version or self.version, key)
 
     def make_timeout(self, timeout: Optional[int] = None) -> Optional[int]:
+        if timeout == 0:
+            raise ValueError(
+                "'timeout' can't be set to 0. "
+                "If you want cache to never expire, set it to 'None'."
+            )
         if timeout is not None:
             return timeout
         if self.timeout is not None:
