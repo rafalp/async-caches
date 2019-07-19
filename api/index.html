@@ -597,15 +597,15 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#return-value" title="Return value" class="md-nav__link">
     Return value
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -784,15 +784,15 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#return-value_1" title="Return value" class="md-nav__link">
     Return value
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -851,15 +851,15 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#return-value_2" title="Return value" class="md-nav__link">
     Return value
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -918,15 +918,15 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#return-value_3" title="Return value" class="md-nav__link">
     Return value
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1297,15 +1297,15 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#return-value" title="Return value" class="md-nav__link">
     Return value
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1484,15 +1484,15 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#return-value_1" title="Return value" class="md-nav__link">
     Return value
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1551,15 +1551,15 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#return-value_2" title="Return value" class="md-nav__link">
     Return value
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1618,15 +1618,15 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#return-value_3" title="Return value" class="md-nav__link">
     Return value
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1656,18 +1656,21 @@
                 
                 <h1 id="api-reference">API reference</h1>
 <h2 id="cache"><code>Cache</code></h2>
+<hr />
 <h3 id="connect"><code>connect</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 </pre></div>
 
 
 <p>Connects cache to server.</p>
+<hr />
 <h3 id="disconnect"><code>disconnect</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
 </pre></div>
 
 
 <p>Disconnects cache from server.</p>
+<hr />
 <h3 id="get"><code>get</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
@@ -1684,6 +1687,7 @@
 <h5 id="version"><code>version</code></h5>
 <p>Version of key that should be returned. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
+<hr />
 <h3 id="set"><code>set</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
@@ -1702,6 +1706,7 @@
 <h5 id="version_1"><code>version</code></h5>
 <p>Version of key that should be set. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
+<hr />
 <h3 id="add"><code>add</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
@@ -1720,6 +1725,7 @@
 <h5 id="version_2"><code>version</code></h5>
 <p>Version of key that should be set. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
+<hr />
 <h3 id="get_or_set"><code>get_or_set</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_or_set</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
@@ -1739,6 +1745,7 @@
 <h5 id="version_3"><code>version</code></h5>
 <p>Version of key that should be get (or set). String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
+<hr />
 <h3 id="get_many"><code>get_many</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_many</span><span class="p">(</span><span class="n">keys</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </pre></div>
@@ -1752,8 +1759,9 @@
 <h5 id="version_4"><code>version</code></h5>
 <p>Version of keys that should be get from the cache. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
-<h3 id="return-value">Return value</h3>
+<h4 id="return-value">Return value</h4>
 <p>Returns dict of cache-returned values. If any of keys didn't exist in the cache or was expired, it's value will be as <code>None</code>.</p>
+<hr />
 <h3 id="set_many"><code>set_many</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set_many</span><span class="p">(</span><span class="n">mapping</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Serializable</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
@@ -1763,6 +1771,7 @@
 <blockquote>
 <p><strong>Note:</strong> if timeout argument is provided, second command will be ran to set keys expiration time on the cache server.</p>
 </blockquote>
+<hr />
 <h3 id="delete"><code>delete</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
@@ -1776,6 +1785,7 @@
 <h5 id="version_5"><code>version</code></h5>
 <p>Version of key that should be deleted from the cache. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
+<hr />
 <h3 id="delete_many"><code>delete_many</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">delete_many</span><span class="p">(</span><span class="n">keys</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
@@ -1789,6 +1799,7 @@
 <h5 id="version_6"><code>version</code></h5>
 <p>Version of keys that should be deleted from the cache. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
+<hr />
 <h3 id="clear"><code>clear</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
@@ -1799,6 +1810,7 @@
 <p><strong>Note:</strong> <code>cache.clear()</code> will remove all keys from cache, not just ones set by your application.</p>
 <p>Be careful when calling it, if your app shares Redis database with other clients.</p>
 </blockquote>
+<hr />
 <h3 id="touch"><code>touch</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
@@ -1815,8 +1827,9 @@
 <h5 id="version_7"><code>version</code></h5>
 <p>Version of key that should be updated. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
-<h3 id="return-value_1">Return value</h3>
+<h4 id="return-value_1">Return value</h4>
 <p>Returns <code>True</code> if key's expirat was updated, and <code>False</code> if key didn't exist in the cache.</p>
+<hr />
 <h3 id="incr"><code>incr</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 </pre></div>
@@ -1833,8 +1846,9 @@
 <h5 id="version_8"><code>version</code></h5>
 <p>Version of key that should be updated. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
-<h3 id="return-value_2">Return value</h3>
+<h4 id="return-value_2">Return value</h4>
 <p>Returns <code>float</code> or <code>int</code> with updated value. If key didn't exist, this value will equal to value passed in delta argument.</p>
+<hr />
 <h3 id="decr"><code>decr</code></h3>
 <div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">decr</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 </pre></div>
@@ -1851,7 +1865,7 @@
 <h5 id="version_9"><code>version</code></h5>
 <p>Version of key that should be updated. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
-<h3 id="return-value_3">Return value</h3>
+<h4 id="return-value_3">Return value</h4>
 <p>Returns <code>float</code> or <code>int</code> with updated value. If key didn't exist, this value will equal to value passed in delta argument.</p>
                 
                   
