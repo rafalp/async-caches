@@ -11,4 +11,4 @@
 
 ## 0.1 (14.07.2019)
 
-- Initial release of library 🎉
+- Initial release of the library 🎉
