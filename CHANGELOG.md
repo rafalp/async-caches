@@ -6,6 +6,7 @@
 - Added code of conduct.
 - Updated `cache.add` to return `True` if key was created in cache and `False` it it didn't.
 - Updated `cache.get_or_set` to support callable for `default` value.
+- Added value check for `timeout` that will raise `ValueError` if its set to `0`. Use `None` instead or don't explicitly pass the value to the argument.
 
 
 ## 0.1 (14.07.2019)
