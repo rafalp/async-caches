@@ -65,9 +65,7 @@ class RedisBackend(BaseBackend):
             return bool(await self._pool.execute("SET", key, json.dumps(value), "NX"))
 
         return bool(
-            await self._pool.execute(
-                "SET", key, json.dumps(value), "EX", timeout, "NX"
-            )
+            await self._pool.execute("SET", key, json.dumps(value), "EX", timeout, "NX")
         )
 
     async def get_or_set(
