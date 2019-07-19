@@ -109,11 +109,11 @@ class Cache:
         *,
         timeout: Optional[int] = None,
         version: Optional[Version] = None,
-    ):
+    ) -> bool:
         """Sets value for key in cache, but only if key wasn't already set."""
         key_ = self.make_key(key, version)
         timeout_ = self.make_timeout(timeout)
-        await self._backend.add(key_, value, timeout=timeout_)
+        return await self._backend.add(key_, value, timeout=timeout_)
 
     async def get_or_set(
         self,

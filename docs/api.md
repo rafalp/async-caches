@@ -105,7 +105,7 @@ Defaults to `None`, unless default version is set for the cache.
 ### `add`
 
 ```python
-await cache.add(key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None)
+await cache.add(key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None) -> bool
 ```
 
 Sets key in the cache if it doesn't already exist, or has expired.
@@ -137,6 +137,11 @@ Defaults to `None` (cache forever), unless default timeout is set for cache.
 Version of key that should be set. String or integer.
 
 Defaults to `None`, unless default version is set for the cache.
+
+
+#### Return value
+
+Returns `True` if key was added to cache and `False` if it already exists.
 
 
 - - -
@@ -179,6 +184,11 @@ Defaults to `None` (cache forever), unless default timeout is set for cache.
 Version of key that should be get (or set). String or integer.
 
 Defaults to `None`, unless default version is set for the cache.
+
+
+#### Return value
+
+Returns key value from cache if it exists, or `default` otherwise.
 
 
 - - -

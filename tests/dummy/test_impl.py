@@ -27,6 +27,11 @@ async def test_adding_key_is_noop(cache):
 
 
 @pytest.mark.asyncio
+async def test_adding_key_always_returns_false(cache):
+    assert await cache.add("test", "Ok!") is False
+
+
+@pytest.mark.asyncio
 async def test_key_get_or_set_is_noop(cache):
     assert await cache.get_or_set("test", "Ok!") == "Ok!"
 

@@ -91,6 +91,17 @@ async def test_key_is_not_added_if_its_already_set(cache):
 
 
 @pytest.mark.asyncio
+async def test_adding_key_returns_true_if_key_was_added(cache):
+    assert await cache.add("test", "Ok!") is True
+
+
+@pytest.mark.asyncio
+async def test_adding_key_returns_false_if_key_already_exists(cache):
+    await cache.set("test", "Ok!")
+    assert await cache.add("test", "Ok!") is False
+
+
+@pytest.mark.asyncio
 async def test_key_get_or_set_sets_given_value_if_key_is_undefined(cache):
     assert await cache.get_or_set("test", "Ok!") == "Ok!"
     assert await cache.get("test") == "Ok!"
