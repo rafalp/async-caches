@@ -2,6 +2,7 @@
 
 ## `Cache`
 
+
 ### `connect`
 
 ```python
@@ -11,6 +12,9 @@ await cache.connect()
 Connects cache to server.
 
 
+- - -
+
+
 ### `disconnect`
 
 ```python
@@ -18,6 +22,9 @@ await cache.disconnect()
 ```
 
 Disconnects cache from server.
+
+
+- - -
 
 
 ### `get`
@@ -50,6 +57,9 @@ Defaults to `None`.
 Version of key that should be returned. String or integer.
 
 Defaults to `None`, unless default version is set for the cache.
+
+
+- - -
 
 
 ### `set`
@@ -89,6 +99,9 @@ Version of key that should be set. String or integer.
 Defaults to `None`, unless default version is set for the cache.
 
 
+- - -
+
+
 ### `add`
 
 ```python
@@ -124,6 +137,9 @@ Defaults to `None` (cache forever), unless default timeout is set for cache.
 Version of key that should be set. String or integer.
 
 Defaults to `None`, unless default version is set for the cache.
+
+
+- - -
 
 
 ### `get_or_set`
@@ -165,6 +181,9 @@ Version of key that should be get (or set). String or integer.
 Defaults to `None`, unless default version is set for the cache.
 
 
+- - -
+
+
 ### `get_many`
 
 ```python
@@ -190,9 +209,12 @@ Version of keys that should be get from the cache. String or integer.
 Defaults to `None`, unless default version is set for the cache.
 
 
-### Return value
+#### Return value
 
 Returns dict of cache-returned values. If any of keys didn't exist in the cache or was expired, it's value will be as `None`.
+
+
+- - -
 
 
 ### `set_many`
@@ -204,6 +226,9 @@ await cache.set_many(mapping: Mapping[str, Serializable], *, timeout: Optional[i
 Sets values for many keys in the cache in single write operation.
 
 > **Note:** if timeout argument is provided, second command will be ran to set keys expiration time on the cache server.
+
+
+- - -
 
 
 ### `delete`
@@ -231,6 +256,9 @@ Version of key that should be deleted from the cache. String or integer.
 Defaults to `None`, unless default version is set for the cache.
 
 
+- - -
+
+
 ### `delete_many`
 
 ```python
@@ -256,6 +284,9 @@ Version of keys that should be deleted from the cache. String or integer.
 Defaults to `None`, unless default version is set for the cache.
 
 
+- - -
+
+
 ### `clear`
 
 ```python
@@ -267,6 +298,9 @@ Deletes all keys from the cache.
 > **Note:** `cache.clear()` will remove all keys from cache, not just ones set by your application.
 >
 > Be careful when calling it, if your app shares Redis database with other clients.
+
+
+- - -
 
 
 ### `touch`
@@ -301,9 +335,12 @@ Version of key that should be updated. String or integer.
 Defaults to `None`, unless default version is set for the cache.
 
 
-### Return value
+#### Return value
 
 Returns `True` if key's expirat was updated, and `False` if key didn't exist in the cache.
+
+
+- - -
 
 
 ### `incr`
@@ -338,9 +375,12 @@ Version of key that should be updated. String or integer.
 Defaults to `None`, unless default version is set for the cache.
 
 
-### Return value
+#### Return value
 
 Returns `float` or `int` with updated value. If key didn't exist, this value will equal to value passed in delta argument.
+
+
+- - -
 
 
 ### `decr`
@@ -375,6 +415,6 @@ Version of key that should be updated. String or integer.
 Defaults to `None`, unless default version is set for the cache.
 
 
-### Return value
+#### Return value
 
 Returns `float` or `int` with updated value. If key didn't exist, this value will equal to value passed in delta argument.

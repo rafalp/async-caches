@@ -16,3 +16,6 @@ nav:
 markdown_extensions:
   - admonition
   - codehilite
+
+extra_css:
+  - custom.css
