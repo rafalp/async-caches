@@ -289,16 +289,21 @@ String with cache key which timeout value should be updated.
 
 ##### `timeout`
 
-Integer with number of seconds after which update key will expire and will be removed by the cache.
+Integer with number of seconds after which updated key will expire and will be removed by the cache, or `None` if key should never expire.
 
 Defaults to `None` (cache forever), unless default timeout is set for cache.
 
 
 ##### `version`
 
-Version of key that should be update. String or integer.
+Version of key that should be updated. String or integer.
 
 Defaults to `None`, unless default version is set for the cache.
+
+
+### Return value
+
+Returns `True` if key's expirat was updated, and `False` if key didn't exist in the cache.
 
 
 ### `incr`
@@ -310,6 +315,34 @@ await cache.incr(key: str, delta: Union[float, int] = 1, *, version: Optional[Ve
 Increases the value stored for specified key by specified amount.
 
 
+#### Required arguments
+
+##### `key`
+
+String with cache key which should be updated.
+
+
+#### Optional arguments
+
+##### `delta`
+
+Amount by which key value should be increased. Can be `float` or `int`.
+
+Defaults to `1`.
+
+
+##### `version`
+
+Version of key that should be updated. String or integer.
+
+Defaults to `None`, unless default version is set for the cache.
+
+
+### Return value
+
+Returns `float` or `int` with updated value. If key didn't exist, this value will equal to value passed in delta argument.
+
+
 ### `decr`
 
 ```python
@@ -317,3 +350,31 @@ await cache.decr(key: str, delta: Union[float, int] = 1, *, version: Optional[Ve
 ```
 
 Decreases the value stored for specified key by specified amount.
+
+
+#### Required arguments
+
+##### `key`
+
+String with cache key which should be updated.
+
+
+#### Optional arguments
+
+##### `delta`
+
+Amount by which key value should be decreased. Can be `float` or `int`.
+
+Defaults to `1`.
+
+
+##### `version`
+
+Version of key that should be updated. String or integer.
+
+Defaults to `None`, unless default version is set for the cache.
+
+
+### Return value
+
+Returns `float` or `int` with updated value. If key didn't exist, this value will equal to value passed in delta argument.
