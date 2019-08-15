@@ -394,8 +394,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#timeout" title="timeout" class="md-nav__link">
-    timeout
+  <a href="#ttl" title="ttl" class="md-nav__link">
+    ttl
   </a>
   
 </li>
@@ -461,8 +461,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#timeout_1" title="timeout" class="md-nav__link">
-    timeout
+  <a href="#ttl_1" title="ttl" class="md-nav__link">
+    ttl
   </a>
   
 </li>
@@ -535,8 +535,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#timeout_2" title="timeout" class="md-nav__link">
-    timeout
+  <a href="#ttl_2" title="ttl" class="md-nav__link">
+    ttl
   </a>
   
 </li>
@@ -782,8 +782,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#timeout_3" title="timeout" class="md-nav__link">
-    timeout
+  <a href="#ttl_3" title="ttl" class="md-nav__link">
+    ttl
   </a>
   
 </li>
@@ -1108,8 +1108,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#timeout" title="timeout" class="md-nav__link">
-    timeout
+  <a href="#ttl" title="ttl" class="md-nav__link">
+    ttl
   </a>
   
 </li>
@@ -1175,8 +1175,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#timeout_1" title="timeout" class="md-nav__link">
-    timeout
+  <a href="#ttl_1" title="ttl" class="md-nav__link">
+    ttl
   </a>
   
 </li>
@@ -1249,8 +1249,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#timeout_2" title="timeout" class="md-nav__link">
-    timeout
+  <a href="#ttl_2" title="ttl" class="md-nav__link">
+    ttl
   </a>
   
 </li>
@@ -1496,8 +1496,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#timeout_3" title="timeout" class="md-nav__link">
-    timeout
+  <a href="#ttl_3" title="ttl" class="md-nav__link">
+    ttl
   </a>
   
 </li>
@@ -1718,7 +1718,7 @@
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
 <hr />
 <h3 id="set"><code>set</code></h3>
-<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1729,15 +1729,15 @@
 <h5 id="value"><code>value</code></h5>
 <p>JSON-serializable value to store in the cache.</p>
 <h4 id="optional-arguments_1">Optional arguments</h4>
-<h5 id="timeout"><code>timeout</code></h5>
+<h5 id="ttl"><code>ttl</code></h5>
 <p>Integer with number of seconds after which set key will expire and will be removed by the cache.</p>
-<p>Defaults to <code>None</code> (cache forever), unless default timeout is set for cache.</p>
+<p>Defaults to <code>None</code> (cache forever), unless default <code>ttl</code> is set for cache.</p>
 <h5 id="version_1"><code>version</code></h5>
 <p>Version of key that should be set. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
 <hr />
 <h3 id="add"><code>add</code></h3>
-<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
 
@@ -1748,9 +1748,9 @@
 <h5 id="value_1"><code>value</code></h5>
 <p>JSON-serializable value to store in the cache.</p>
 <h4 id="optional-arguments_2">Optional arguments</h4>
-<h5 id="timeout_1"><code>timeout</code></h5>
+<h5 id="ttl_1"><code>ttl</code></h5>
 <p>Integer with number of seconds after which set key will expire and will be removed by the cache. </p>
-<p>Defaults to <code>None</code> (cache forever), unless default timeout is set for cache.</p>
+<p>Defaults to <code>None</code> (cache forever), unless default ttl is set for cache.</p>
 <h5 id="version_2"><code>version</code></h5>
 <p>Version of key that should be set. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
@@ -1758,7 +1758,7 @@
 <p>Returns <code>True</code> if key was added to cache and <code>False</code> if it already exists.</p>
 <hr />
 <h3 id="get_or_set"><code>get_or_set</code></h3>
-<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_or_set</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_or_set</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 
 
@@ -1770,9 +1770,9 @@
 <p>Default value that should be returned if key doesn't exist in the cache, or has expired. It has to be JSON-serializable and will be set in cache if read didn't return the value.</p>
 <p>If <code>default</code> is callable, it will be called and it's return value will be set in cache.</p>
 <h4 id="optional-arguments_3">Optional arguments</h4>
-<h5 id="timeout_2"><code>timeout</code></h5>
+<h5 id="ttl_2"><code>ttl</code></h5>
 <p>Integer with number of seconds after which set key will expire and will be removed by the cache. </p>
-<p>Defaults to <code>None</code> (cache forever), unless default timeout is set for cache.</p>
+<p>Defaults to <code>None</code> (cache forever), unless default ttl is set for cache.</p>
 <h5 id="version_3"><code>version</code></h5>
 <p>Version of key that should be get (or set). String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>
@@ -1796,13 +1796,13 @@
 <p>Returns dict of cache-returned values. If any of keys didn't exist in the cache or was expired, it's value will be as <code>None</code>.</p>
 <hr />
 <h3 id="set_many"><code>set_many</code></h3>
-<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set_many</span><span class="p">(</span><span class="n">mapping</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Serializable</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">set_many</span><span class="p">(</span><span class="n">mapping</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Serializable</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
 
 
 <p>Sets values for many keys in the cache in single write operation.</p>
 <blockquote>
-<p><strong>Note:</strong> if timeout argument is provided, second command will be ran to set keys expiration time on the cache server.</p>
+<p><strong>Note:</strong> if ttl argument is provided, second command will be ran to set keys expiration time on the cache server.</p>
 </blockquote>
 <hr />
 <h3 id="delete"><code>delete</code></h3>
@@ -1845,18 +1845,18 @@
 </blockquote>
 <hr />
 <h3 id="touch"><code>touch</code></h3>
-<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+<div class="codehilite"><pre><span></span><span class="n">await</span> <span class="n">cache</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
 
 <p>Updates expiration time for the key.</p>
 <h4 id="required-arguments_7">Required arguments</h4>
 <h5 id="key_5"><code>key</code></h5>
-<p>String with cache key which timeout value should be updated.</p>
+<p>String with cache key which ttl value should be updated.</p>
 <h4 id="optional-arguments_7">Optional arguments</h4>
-<h5 id="timeout_3"><code>timeout</code></h5>
+<h5 id="ttl_3"><code>ttl</code></h5>
 <p>Integer with number of seconds after which updated key will expire and will be removed by the cache, or <code>None</code> if key should never expire.</p>
-<p>Defaults to <code>None</code> (cache forever), unless default timeout is set for cache.</p>
+<p>Defaults to <code>None</code> (cache forever), unless default ttl is set for cache.</p>
 <h5 id="version_7"><code>version</code></h5>
 <p>Version of key that should be updated. String or integer.</p>
 <p>Defaults to <code>None</code>, unless default version is set for the cache.</p>

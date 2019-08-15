@@ -307,8 +307,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#default-timeout" title="Default timeout" class="md-nav__link">
-    Default timeout
+  <a href="#default-time-to-live" title="Default time to live" class="md-nav__link">
+    Default time to live
   </a>
   
 </li>
@@ -433,8 +433,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#default-timeout" title="Default timeout" class="md-nav__link">
-    Default timeout
+  <a href="#default-time-to-live" title="Default time to live" class="md-nav__link">
+    Default time to live
   </a>
   
 </li>
@@ -500,7 +500,7 @@
 </blockquote>
 <h2 id="local-memory-cache">Local memory cache</h2>
 <p>Cache backend that stores data in local memory. Lets you develop and test caching without need for actual cache server. Its purged when application restarts, so you don't have to spend time invalidating caches when changing your app.</p>
-<p>This backend supports cache versions and timeouts.</p>
+<p>This backend supports cache versions and time to live.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">caches</span> <span class="kn">import</span> <span class="n">Cache</span>
 
 
@@ -509,7 +509,7 @@
 
 
 <h2 id="redis">Redis</h2>
-<p>This backend stores data on Redis server. This is only backend intended for <em>actual</em> use on production. It supports key prefixes, versions and timeouts.</p>
+<p>This backend stores data on Redis server. This is only backend intended for <em>actual</em> use on production. It supports key prefixes, versions and time to live.</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">caches</span> <span class="kn">import</span> <span class="n">Cache</span>
 
 
@@ -566,25 +566,25 @@
 
 
 <span class="c1"># Option included in cache link...</span>
-<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s2">&quot;redis://localhost?timeout=600&quot;</span><span class="p">)</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s2">&quot;redis://localhost?ttl=600&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># ...and set as kwarg</span>
-<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s2">&quot;locmem://default&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s2">&quot;locmem://default&quot;</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 
 
 <blockquote>
 <p><strong>Note:</strong> when option is set in both URL and kwarg, the URL value is discarded. </p>
 </blockquote>
-<h3 id="default-timeout">Default timeout</h3>
-<p>By default cache keys never expire, unless expiration time was explicitly set for a specific key.</p>
-<p>You can override this behaviour by setting default timeout (in seconds) for all keys on cache:</p>
+<h3 id="default-time-to-live">Default time to live</h3>
+<p>By default cache keys never expire, unless time to live was explicitly set for a specific key.</p>
+<p>You can override this behavior by setting default ttl (in seconds) for all keys on cache:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">caches</span> <span class="kn">import</span> <span class="n">Cache</span>
 
 
 <span class="c1"># Expire keys after 5 minutes.</span>
-<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s2">&quot;redis://localhost&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s2">&quot;redis://localhost&quot;</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 
 
