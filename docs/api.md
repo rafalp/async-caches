@@ -65,7 +65,7 @@ Defaults to `None`, unless default version is set for the cache.
 ### `set`
 
 ```python
-await cache.set(key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None)
+await cache.set(key: str, value: Serializable, *, ttl: Optional[int] = None, version: Optional[Version] = None)
 ```
 
 Sets new value for key in the cache. If key doesn't exist it will be created. 
@@ -85,11 +85,11 @@ JSON-serializable value to store in the cache.
 
 #### Optional arguments
 
-##### `timeout`
+##### `ttl`
 
 Integer with number of seconds after which set key will expire and will be removed by the cache.
 
-Defaults to `None` (cache forever), unless default timeout is set for cache.
+Defaults to `None` (cache forever), unless default `ttl` is set for cache.
 
 
 ##### `version`
@@ -105,7 +105,7 @@ Defaults to `None`, unless default version is set for the cache.
 ### `add`
 
 ```python
-await cache.add(key: str, value: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None) -> bool
+await cache.add(key: str, value: Serializable, *, ttl: Optional[int] = None, version: Optional[Version] = None) -> bool
 ```
 
 Sets key in the cache if it doesn't already exist, or has expired.
@@ -125,11 +125,11 @@ JSON-serializable value to store in the cache.
 
 #### Optional arguments
 
-##### `timeout`
+##### `ttl`
 
 Integer with number of seconds after which set key will expire and will be removed by the cache. 
 
-Defaults to `None` (cache forever), unless default timeout is set for cache.
+Defaults to `None` (cache forever), unless default ttl is set for cache.
 
 
 ##### `version`
@@ -150,7 +150,7 @@ Returns `True` if key was added to cache and `False` if it already exists.
 ### `get_or_set`
 
 ```python
-await cache.get_or_set(key: str, default: Serializable, *, timeout: Optional[int] = None, version: Optional[Version] = None) -> Any
+await cache.get_or_set(key: str, default: Serializable, *, ttl: Optional[int] = None, version: Optional[Version] = None) -> Any
 ```
 
 Gets value for key from the cache. If key doesn't exist or has expired, new key is set with `default` value.
@@ -172,11 +172,11 @@ If `default` is callable, it will be called and it's return value will be set in
 
 #### Optional arguments
 
-##### `timeout`
+##### `ttl`
 
 Integer with number of seconds after which set key will expire and will be removed by the cache. 
 
-Defaults to `None` (cache forever), unless default timeout is set for cache.
+Defaults to `None` (cache forever), unless default ttl is set for cache.
 
 
 ##### `version`
@@ -230,12 +230,12 @@ Returns dict of cache-returned values. If any of keys didn't exist in the cache 
 ### `set_many`
 
 ```python
-await cache.set_many(mapping: Mapping[str, Serializable], *, timeout: Optional[int] = None)
+await cache.set_many(mapping: Mapping[str, Serializable], *, ttl: Optional[int] = None)
 ```
 
 Sets values for many keys in the cache in single write operation.
 
-> **Note:** if timeout argument is provided, second command will be ran to set keys expiration time on the cache server.
+> **Note:** if ttl argument is provided, second command will be ran to set keys expiration time on the cache server.
 
 
 - - -
@@ -316,7 +316,7 @@ Deletes all keys from the cache.
 ### `touch`
 
 ```python
-await cache.touch(key: str, timeout: Optional[int] = None, *, version: Optional[Version] = None) -> bool
+await cache.touch(key: str, ttl: Optional[int] = None, *, version: Optional[Version] = None) -> bool
 ```
 
 Updates expiration time for the key.
@@ -326,16 +326,16 @@ Updates expiration time for the key.
 
 ##### `key`
 
-String with cache key which timeout value should be updated.
+String with cache key which ttl value should be updated.
 
 
 #### Optional arguments
 
-##### `timeout`
+##### `ttl`
 
 Integer with number of seconds after which updated key will expire and will be removed by the cache, or `None` if key should never expire.
 
-Defaults to `None` (cache forever), unless default timeout is set for cache.
+Defaults to `None` (cache forever), unless default ttl is set for cache.
 
 
 ##### `version`

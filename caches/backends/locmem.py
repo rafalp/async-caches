@@ -24,29 +24,25 @@ class LocMemBackend(BaseBackend):
         if key not in self._caches[self._id]:
             return default
 
-        value, timeout = self._caches[self._id][key]
-        if timeout and timeout < time():
+        value, ttl = self._caches[self._id][key]
+        if ttl and ttl < time():
             return default
 
         return json.loads(value)
 
-    async def set(
-        self, key: str, value: Serializable, *, timeout: Optional[int]
-    ) -> Any:
-        if timeout is not None:
-            timeout += int(time())
-        self._caches[self._id][key] = json.dumps(value), timeout
+    async def set(self, key: str, value: Serializable, *, ttl: Optional[int]) -> Any:
+        if ttl is not None:
+            ttl += int(time())
+        self._caches[self._id][key] = json.dumps(value), ttl
 
-    async def add(
-        self, key: str, value: Serializable, *, timeout: Optional[int]
-    ) -> bool:
+    async def add(self, key: str, value: Serializable, *, ttl: Optional[int]) -> bool:
         if key not in self._caches[self._id]:
-            await self.set(key, value, timeout=timeout)
+            await self.set(key, value, ttl=ttl)
             return True
         return False
 
     async def get_or_set(
-        self, key: str, default: Serializable, *, timeout: Optional[int]
+        self, key: str, default: Serializable, *, ttl: Optional[int]
     ) -> Any:
         value = await self.get(key, None)
         if value is None:
@@ -54,7 +50,7 @@ class LocMemBackend(BaseBackend):
                 default = default()
                 if isawaitable(default):
                     default = await default
-            await self.set(key, default, timeout=timeout)
+            await self.set(key, default, ttl=ttl)
             return default
         return value
 
@@ -62,10 +58,10 @@ class LocMemBackend(BaseBackend):
         return {key: await self.get(key, None) for key in keys}
 
     async def set_many(
-        self, mapping: Mapping[str, Serializable], *, timeout: Optional[int]
+        self, mapping: Mapping[str, Serializable], *, ttl: Optional[int]
     ):
         for k, v in mapping.items():
-            await self.set(k, v, timeout=timeout)
+            await self.set(k, v, ttl=ttl)
 
     async def delete(self, key: str):
         self._caches[self._id].pop(key, None)
@@ -77,14 +73,14 @@ class LocMemBackend(BaseBackend):
     async def clear(self):
         self._caches[self._id] = {}
 
-    async def touch(self, key: str, timeout: Optional[int]) -> bool:
+    async def touch(self, key: str, ttl: Optional[int]) -> bool:
         if key not in self._caches[self._id]:
             return False
-        if timeout is not None:
-            timeout += int(time())
+        if ttl is not None:
+            ttl += int(time())
 
         value, _ = self._caches[self._id][key]
-        self._caches[self._id][key] = value, timeout
+        self._caches[self._id][key] = value, ttl
         return True
 
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
@@ -93,9 +89,9 @@ class LocMemBackend(BaseBackend):
         if not isinstance(delta, (float, int)):
             raise ValueError(f"incr value must be int or float")
 
-        value, timeout = self._caches[self._id][key]
+        value, ttl = self._caches[self._id][key]
         value = json.loads(value) + delta
-        self._caches[self._id][key] = json.dumps(value), timeout
+        self._caches[self._id][key] = json.dumps(value), ttl
         return value
 
     async def decr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
@@ -104,7 +100,7 @@ class LocMemBackend(BaseBackend):
         if not isinstance(delta, (float, int)):
             raise ValueError(f"decr value must be int or float")
 
-        value, timeout = self._caches[self._id][key]
+        value, ttl = self._caches[self._id][key]
         value = json.loads(value) - delta
-        self._caches[self._id][key] = json.dumps(value), timeout
+        self._caches[self._id][key] = json.dumps(value), ttl
         return value

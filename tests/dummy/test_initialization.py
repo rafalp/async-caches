@@ -15,8 +15,8 @@ def test_dummy_cache_can_be_initialized_with_key_prefix():
     Cache("dummy://", key_prefix="test")
 
 
-def test_dummy_cache_can_be_initialized_with_timeout():
-    Cache("dummy://", timeout=600)
+def test_dummy_cache_can_be_initialized_with_ttl():
+    Cache("dummy://", ttl=600)
 
 
 def test_dummy_cache_can_be_initialized_with_version():

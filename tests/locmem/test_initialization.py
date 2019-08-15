@@ -15,8 +15,8 @@ def test_locmem_cache_can_be_initialized_with_key_prefix():
     Cache("locmem://", key_prefix="test")
 
 
-def test_locmem_cache_can_be_initialized_with_timeout():
-    Cache("locmem://", timeout=600)
+def test_locmem_cache_can_be_initialized_with_ttl():
+    Cache("locmem://", ttl=600)
 
 
 def test_locmem_cache_can_be_initialized_with_version():

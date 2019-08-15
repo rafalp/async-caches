@@ -37,7 +37,7 @@ async def test_key_can_be_versioned(cache):
 
 @pytest.mark.asyncio
 async def test_none_is_returned_for_expired_key(cache):
-    await cache.set("test", "Ok!", timeout=1)
+    await cache.set("test", "Ok!", ttl=1)
     await asyncio.sleep(2)
     assert await cache.get("test") is None
 
@@ -55,7 +55,7 @@ async def test_none_is_returned_for_nonexistant_version(cache):
 
 @pytest.mark.asyncio
 async def test_default_is_returned_for_expired_key(cache):
-    await cache.set("test", "Ok!", timeout=1)
+    await cache.set("test", "Ok!", ttl=1)
     await asyncio.sleep(2)
     assert await cache.get("text", "default") == "default"
 
@@ -78,8 +78,8 @@ async def test_key_can_be_added(cache):
 
 
 @pytest.mark.asyncio
-async def test_key_can_be_added_with_timeout(cache):
-    await cache.add("test", "Ok!", timeout=1)
+async def test_key_can_be_added_with_ttl(cache):
+    await cache.add("test", "Ok!", ttl=1)
     assert await cache.get("test") == "Ok!"
     await asyncio.sleep(2)
     assert await cache.get("test") is None
@@ -124,7 +124,7 @@ async def test_key_get_or_set_is_not_overwriting_previously_set_value(cache):
 
 @pytest.mark.asyncio
 async def test_key_get_or_set_overwrites_expired_key(cache):
-    await cache.set("test", "Ok!", timeout=1)
+    await cache.set("test", "Ok!", ttl=1)
     await asyncio.sleep(2)
     assert await cache.get_or_set("test", "New") == "New"
     assert await cache.get("test") == "New"
@@ -168,7 +168,7 @@ async def test_many_undefined_keys_are_returned_as_none(cache):
 @pytest.mark.asyncio
 async def test_many_expired_keys_are_returned_as_none(cache):
     await cache.set("test", "Ok!")
-    await cache.set("expired", "Ok!", timeout=1)
+    await cache.set("expired", "Ok!", ttl=1)
     await asyncio.sleep(2)
     values = await cache.get_many(["test", "expired"])
     assert len(values) == 2
@@ -184,8 +184,8 @@ async def test_many_keys_can_be_set(cache):
 
 
 @pytest.mark.asyncio
-async def test_many_keys_can_be_set_with_timeout(cache):
-    await cache.set_many({"test": "Ok!", "hello": "world"}, timeout=1)
+async def test_many_keys_can_be_set_with_ttl(cache):
+    await cache.set_many({"test": "Ok!", "hello": "world"}, ttl=1)
     assert await cache.get("test") == "Ok!"
     assert await cache.get("hello") == "world"
     await asyncio.sleep(2)
@@ -232,8 +232,8 @@ async def test_set_keys_are_cleared(cache):
 
 
 @pytest.mark.asyncio
-async def test_touch_removes_expired_key_timeout(cache):
-    await cache.set("test", "Ok!", timeout=1)
+async def test_touch_removes_expired_key_ttl(cache):
+    await cache.set("test", "Ok!", ttl=1)
     assert await cache.get("test") == "Ok!"
     assert await cache.touch("test") is True
     await asyncio.sleep(2)
@@ -241,8 +241,8 @@ async def test_touch_removes_expired_key_timeout(cache):
 
 
 @pytest.mark.asyncio
-async def test_touch_updates_expired_key_timeout(cache):
-    await cache.set("test", "Ok!", timeout=1)
+async def test_touch_updates_expired_key_ttl(cache):
+    await cache.set("test", "Ok!", ttl=1)
     assert await cache.get("test") == "Ok!"
     assert await cache.touch("test", 10) is True
     await asyncio.sleep(2)

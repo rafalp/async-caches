@@ -73,43 +73,43 @@ def test_cache_version_kwarg_overrides_version_set_in_url():
     assert "test" in key
 
 
-def test_cache_timeout_defaults_to_none(cache):
-    assert cache.make_timeout() is None
+def test_cache_ttl_defaults_to_none(cache):
+    assert cache.make_ttl() is None
 
 
-def test_cache_timeout_can_be_set_per_key(cache):
-    assert cache.make_timeout(100) == 100
+def test_cache_ttl_can_be_set_per_key(cache):
+    assert cache.make_ttl(100) == 100
 
 
-def test_cache_can_be_set_default_timeout():
-    cache = Cache("dummy://null", timeout=600)
-    assert cache.make_timeout() == 600
+def test_cache_can_be_set_default_ttl():
+    cache = Cache("dummy://null", ttl=600)
+    assert cache.make_ttl() == 600
 
 
-def test_cache_can_be_set_default_timeout_in_url():
-    cache = Cache("dummy://null?timeout=600")
-    assert cache.make_timeout() == 600
+def test_cache_can_be_set_default_ttl_in_url():
+    cache = Cache("dummy://null?ttl=600")
+    assert cache.make_ttl() == 600
 
 
-def test_cache_default_timeout_can_be_overrided_per_key():
-    cache = Cache("dummy://null", timeout=600)
-    assert cache.make_timeout(120) == 120
+def test_cache_default_ttl_can_be_overrided_per_key():
+    cache = Cache("dummy://null", ttl=600)
+    assert cache.make_ttl(120) == 120
 
 
-def test_cache_errors_if_timeout_option_is_set_to_0():
+def test_cache_errors_if_ttl_option_is_set_to_0():
     with pytest.raises(ValueError):
-        Cache("dummy://null", timeout=0)
+        Cache("dummy://null", ttl=0)
 
 
-def test_cache_errors_if_timeout_option_in_url_is_set_to_0():
+def test_cache_errors_if_ttl_option_in_url_is_set_to_0():
     with pytest.raises(ValueError):
-        Cache("dummy://null?timeout=0")
+        Cache("dummy://null?ttl=0")
 
 
-def test_cache_errors_if_key_timeout_is_set_to_0():
+def test_cache_errors_if_key_ttl_is_set_to_0():
     cache = Cache("dummy://null")
     with pytest.raises(ValueError):
-        assert cache.make_timeout(0)
+        assert cache.make_ttl(0)
 
 
 @pytest.mark.asyncio

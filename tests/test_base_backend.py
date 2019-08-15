@@ -35,19 +35,19 @@ async def test_base_backend_doesnt_implement_getting_keys(cache):
 @pytest.mark.asyncio
 async def test_base_backend_doesnt_implement_setting_keys(cache):
     with pytest.raises(NotImplementedError):
-        await cache.set("test", "Ok!", timeout=0)
+        await cache.set("test", "Ok!", ttl=0)
 
 
 @pytest.mark.asyncio
 async def test_base_backend_doesnt_implement_adding_keys(cache):
     with pytest.raises(NotImplementedError):
-        await cache.add("test", "Ok!", timeout=0)
+        await cache.add("test", "Ok!", ttl=0)
 
 
 @pytest.mark.asyncio
 async def test_base_backend_doesnt_implement_get_or_set_keys(cache):
     with pytest.raises(NotImplementedError):
-        await cache.get_or_set("test", "Ok!", timeout=0)
+        await cache.get_or_set("test", "Ok!", ttl=0)
 
 
 @pytest.mark.asyncio
@@ -59,7 +59,7 @@ async def test_base_backend_doesnt_implement_getting_many_keys(cache):
 @pytest.mark.asyncio
 async def test_base_backend_doesnt_implement_setting_many_keys(cache):
     with pytest.raises(NotImplementedError):
-        await cache.set_many({"test": "Ok!", "hello": "World!"}, timeout=0)
+        await cache.set_many({"test": "Ok!", "hello": "World!"}, ttl=0)
 
 
 @pytest.mark.asyncio

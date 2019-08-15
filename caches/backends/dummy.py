@@ -21,7 +21,7 @@ class DummyBackend(BaseBackend):
         key: str,
         value: Serializable,
         *,
-        timeout: Optional[int],  # pylint: disable=unused-argument
+        ttl: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:
         json.dumps(value)
 
@@ -30,7 +30,7 @@ class DummyBackend(BaseBackend):
         key: str,
         value: Serializable,
         *,
-        timeout: Optional[int],  # pylint: disable=unused-argument
+        ttl: Optional[int],  # pylint: disable=unused-argument
     ) -> bool:
         json.dumps(value)
         return False
@@ -40,7 +40,7 @@ class DummyBackend(BaseBackend):
         key: str,
         default: Serializable,
         *,
-        timeout: Optional[int],  # pylint: disable=unused-argument
+        ttl: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:
         if callable(default):
             default = default()
@@ -56,7 +56,7 @@ class DummyBackend(BaseBackend):
         self,
         mapping: Mapping[str, Serializable],
         *,
-        timeout: Optional[int],  # pylint: disable=unused-argument
+        ttl: Optional[int],  # pylint: disable=unused-argument
     ):
         for value in mapping.values():
             json.dumps(value)
@@ -70,7 +70,7 @@ class DummyBackend(BaseBackend):
     async def clear(self):
         pass
 
-    async def touch(self, key: str, timeout: Optional[int]) -> bool:
+    async def touch(self, key: str, ttl: Optional[int]) -> bool:
         return False
 
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:

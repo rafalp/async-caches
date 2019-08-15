@@ -52,24 +52,22 @@ class RedisBackend(BaseBackend):
         value = await self._pool.execute("GET", key)
         return json.loads(value) if value is not None else default
 
-    async def set(
-        self, key: str, value: Serializable, *, timeout: Optional[int]
-    ) -> Any:
-        if timeout is None:
+    async def set(self, key: str, value: Serializable, *, ttl: Optional[int]) -> Any:
+        if ttl is None:
             await self._pool.execute("SET", key, json.dumps(value))
-        elif timeout:
-            await self._pool.execute("SETEX", key, timeout, json.dumps(value))
+        elif ttl:
+            await self._pool.execute("SETEX", key, ttl, json.dumps(value))
 
-    async def add(self, key: str, value: Serializable, *, timeout: Optional[int]):
-        if timeout is None:
+    async def add(self, key: str, value: Serializable, *, ttl: Optional[int]):
+        if ttl is None:
             return bool(await self._pool.execute("SET", key, json.dumps(value), "NX"))
 
         return bool(
-            await self._pool.execute("SET", key, json.dumps(value), "EX", timeout, "NX")
+            await self._pool.execute("SET", key, json.dumps(value), "EX", ttl, "NX")
         )
 
     async def get_or_set(
-        self, key: str, default: Serializable, *, timeout: Optional[int]
+        self, key: str, default: Serializable, *, ttl: Optional[int]
     ) -> Any:
         value = await self.get(key, None)
         if value is None:
@@ -77,7 +75,7 @@ class RedisBackend(BaseBackend):
                 default = default()
                 if isawaitable(default):
                     default = await default
-            await self.set(key, default, timeout=timeout)
+            await self.set(key, default, ttl=ttl)
             return default
         return value
 
@@ -89,18 +87,18 @@ class RedisBackend(BaseBackend):
         }
 
     async def set_many(
-        self, mapping: Mapping[str, Serializable], *, timeout: Optional[int]
+        self, mapping: Mapping[str, Serializable], *, ttl: Optional[int]
     ):
-        if timeout is None or timeout:
+        if ttl is None or ttl:
             values = []
             for key, value in mapping.items():
                 values.append(key)
                 values.append(json.dumps(value))
             await self._pool.execute("MSET", *values)
-        if timeout:
+        if ttl:
             expire = []
             for key in mapping:
-                expire.append(self._pool.execute("EXPIRE", key, timeout))
+                expire.append(self._pool.execute("EXPIRE", key, ttl))
             await asyncio.gather(*expire)
 
     async def delete(self, key: str):
@@ -112,10 +110,10 @@ class RedisBackend(BaseBackend):
     async def clear(self):
         await self._pool.execute("FLUSHDB", "async")
 
-    async def touch(self, key: str, timeout: Optional[int]) -> bool:
-        if timeout is None:
+    async def touch(self, key: str, ttl: Optional[int]) -> bool:
+        if ttl is None:
             return bool(await self._pool.execute("PERSIST", key))
-        return bool(await self._pool.execute("EXPIRE", key, timeout))
+        return bool(await self._pool.execute("EXPIRE", key, ttl))
 
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
         if not await self._pool.execute("EXISTS", key):

@@ -17,7 +17,7 @@ class Cache:
         self,
         url: Union[str, "CacheURL"],
         *,
-        timeout: Optional[int] = None,
+        ttl: Optional[int] = None,
         version: Optional[Version] = None,
         key_prefix: str = "",
         **options: Any,
@@ -25,16 +25,16 @@ class Cache:
         self.url = CacheURL(url)
 
         url_options = self.url.options
-        self.timeout = timeout
+        self.ttl = ttl
         self.version = version or url_options.get("version", "")
         self.key_prefix = key_prefix or url_options.get("key_prefix", "")
 
-        if self.timeout is None and url_options.get("timeout") is not None:
-            self.timeout = int(url_options["timeout"])
+        if self.ttl is None and url_options.get("ttl") is not None:
+            self.ttl = int(url_options["ttl"])
 
-        if timeout == 0 or self.timeout == 0:
+        if ttl == 0 or self.ttl == 0:
             raise ValueError(
-                "'timeout' option can't be set to 0. "
+                "'ttl' option can't be set to 0. "
                 "If you want cache keys to never expire, set it to 'None'."
             )
 
@@ -50,7 +50,7 @@ class Cache:
         assert issubclass(backend_cls, BaseBackend)
         self._backend = backend_cls(
             self.url,
-            timeout=self.timeout,
+            ttl=self.ttl,
             version=self.version,
             key_prefix=self.key_prefix,
             **options,
@@ -81,16 +81,16 @@ class Cache:
     def make_key(self, key: str, version: Optional[Version] = None) -> str:
         return "%s:%s:%s" % (self.key_prefix, version or self.version, key)
 
-    def make_timeout(self, timeout: Optional[int] = None) -> Optional[int]:
-        if timeout == 0:
+    def make_ttl(self, ttl: Optional[int] = None) -> Optional[int]:
+        if ttl == 0:
             raise ValueError(
-                "'timeout' can't be set to 0. "
+                "'ttl' can't be set to 0. "
                 "If you want cache to never expire, set it to 'None'."
             )
-        if timeout is not None:
-            return timeout
-        if self.timeout is not None:
-            return self.timeout
+        if ttl is not None:
+            return ttl
+        if self.ttl is not None:
+            return self.ttl
         return None
 
     async def get(
@@ -105,40 +105,40 @@ class Cache:
         key: str,
         value: Serializable,
         *,
-        timeout: Optional[int] = None,
+        ttl: Optional[int] = None,
         version: Optional[Version] = None,
     ) -> Any:
         """Sets value for key in cache."""
         key_ = self.make_key(key, version)
-        timeout_ = self.make_timeout(timeout)
-        await self._backend.set(key_, value, timeout=timeout_)
+        ttl_ = self.make_ttl(ttl)
+        await self._backend.set(key_, value, ttl=ttl_)
 
     async def add(
         self,
         key: str,
         value: Serializable,
         *,
-        timeout: Optional[int] = None,
+        ttl: Optional[int] = None,
         version: Optional[Version] = None,
     ) -> bool:
         """Sets value for key in cache, but only if key wasn't already set."""
         key_ = self.make_key(key, version)
-        timeout_ = self.make_timeout(timeout)
-        return await self._backend.add(key_, value, timeout=timeout_)
+        ttl_ = self.make_ttl(ttl)
+        return await self._backend.add(key_, value, ttl=ttl_)
 
     async def get_or_set(
         self,
         key: str,
         default: Serializable,
         *,
-        timeout: Optional[int] = None,
+        ttl: Optional[int] = None,
         version: Optional[Version] = None,
     ) -> Any:
         """Gets key value from cache, or default if key was not found or expired.
         If key was not found in the cache, it will be set with default value."""
         key_ = self.make_key(key, version)
-        timeout_ = self.make_timeout(timeout)
-        return await self._backend.get_or_set(key_, default, timeout=timeout_)
+        ttl_ = self.make_ttl(ttl)
+        return await self._backend.get_or_set(key_, default, ttl=ttl_)
 
     async def get_many(
         self, keys: Iterable[str], version: Optional[Version] = None
@@ -150,12 +150,12 @@ class Cache:
         return {key: values[keys_[key]] for key in keys}
 
     async def set_many(
-        self, mapping: Mapping[str, Serializable], *, timeout: Optional[int] = None
+        self, mapping: Mapping[str, Serializable], *, ttl: Optional[int] = None
     ):
         """Sets values for specified keys in cache."""
         mapping_ = {self.make_key(key): mapping[key] for key in mapping}
-        timeout_ = self.make_timeout(timeout)
-        await self._backend.set_many(mapping_, timeout=timeout_)
+        ttl_ = self.make_ttl(ttl)
+        await self._backend.set_many(mapping_, ttl=ttl_)
 
     async def delete(self, key: str, version: Optional[Version] = None):
         """Deletes specified key from cache."""
@@ -172,16 +172,12 @@ class Cache:
         await self._backend.clear()
 
     async def touch(
-        self,
-        key: str,
-        timeout: Optional[int] = None,
-        *,
-        version: Optional[Version] = None,
+        self, key: str, ttl: Optional[int] = None, *, version: Optional[Version] = None
     ) -> bool:
         """Updates key's expiration time in cache."""
         key_ = self.make_key(key, version)
-        timeout_ = self.make_timeout(timeout)
-        return await self._backend.touch(key_, timeout_)
+        ttl_ = self.make_ttl(ttl)
+        return await self._backend.touch(key_, ttl_)
 
     async def incr(
         self,

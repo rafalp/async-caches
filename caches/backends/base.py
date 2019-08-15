@@ -18,18 +18,14 @@ class BaseBackend:
     async def get(self, key: str, default: Any) -> Any:
         raise NotImplementedError()
 
-    async def set(
-        self, key: str, value: Serializable, *, timeout: Optional[int]
-    ) -> Any:
+    async def set(self, key: str, value: Serializable, *, ttl: Optional[int]) -> Any:
         raise NotImplementedError()
 
-    async def add(
-        self, key: str, value: Serializable, *, timeout: Optional[int]
-    ) -> bool:
+    async def add(self, key: str, value: Serializable, *, ttl: Optional[int]) -> bool:
         raise NotImplementedError()
 
     async def get_or_set(
-        self, key: str, default: Serializable, *, timeout: Optional[int]
+        self, key: str, default: Serializable, *, ttl: Optional[int]
     ) -> Any:
         raise NotImplementedError()
 
@@ -37,7 +33,7 @@ class BaseBackend:
         raise NotImplementedError()
 
     async def set_many(
-        self, mapping: Mapping[str, Serializable], *, timeout: Optional[int]
+        self, mapping: Mapping[str, Serializable], *, ttl: Optional[int]
     ):
         raise NotImplementedError()
 
@@ -50,7 +46,7 @@ class BaseBackend:
     async def clear(self):
         raise NotImplementedError()
 
-    async def touch(self, key: str, timeout: Optional[int]) -> bool:
+    async def touch(self, key: str, ttl: Optional[int]) -> bool:
         raise NotImplementedError()
 
     async def incr(self, key: str, delta: Union[float, int]) -> Union[float, int]:

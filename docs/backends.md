@@ -21,7 +21,7 @@ cache = Cache("dummy://null")
 
 Cache backend that stores data in local memory. Lets you develop and test caching without need for actual cache server. Its purged when application restarts, so you don't have to spend time invalidating caches when changing your app.
 
-This backend supports cache versions and timeouts.
+This backend supports cache versions and time to live.
 
 ```python
 from caches import Cache
@@ -33,7 +33,7 @@ cache = Cache("locmem://null")
 
 ## Redis
 
-This backend stores data on Redis server. This is only backend intended for *actual* use on production. It supports key prefixes, versions and timeouts.
+This backend stores data on Redis server. This is only backend intended for *actual* use on production. It supports key prefixes, versions and time to live.
 
 
 ```python
@@ -104,28 +104,28 @@ from caches import Cache
 
 
 # Option included in cache link...
-cache = Cache("redis://localhost?timeout=600")
+cache = Cache("redis://localhost?ttl=600")
 
 
 # ...and set as kwarg
-cache = Cache("locmem://default", timeout=600)
+cache = Cache("locmem://default", ttl=600)
 ```
 
 > **Note:** when option is set in both URL and kwarg, the URL value is discarded. 
 
 
-### Default timeout
+### Default time to live
 
-By default cache keys never expire, unless expiration time was explicitly set for a specific key.
+By default cache keys never expire, unless time to live was explicitly set for a specific key.
 
-You can override this behaviour by setting default timeout (in seconds) for all keys on cache:
+You can override this behavior by setting default ttl (in seconds) for all keys on cache:
 
 ```python
 from caches import Cache
 
 
 # Expire keys after 5 minutes.
-cache = Cache("redis://localhost", timeout=600)
+cache = Cache("redis://localhost", ttl=600)
 ```
 
 
