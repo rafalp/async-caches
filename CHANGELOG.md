@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3 (15.08.2019)
+
+- Renamed `timeout` to `ttl`.
+
+
 ## 0.2 (20.07.2019)
 
 - Added [documentation](https://rafalp.github.io/async-caches/).

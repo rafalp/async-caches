@@ -28,7 +28,7 @@ setup(
     long_description=README,
     long_description_content_type="text/markdown",
     license="BSD",
-    version="0.2.0",
+    version="0.3.0",
     url="https://github.com/rafalp/async-caches",
     packages=["caches"],
     include_package_data=True,
