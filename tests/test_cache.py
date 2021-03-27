@@ -123,3 +123,5 @@ async def test_cache_can_be_used_as_context_manager():
         assert await cache.get("test") == "Ok!"
 
         assert await cache.get_or_set('test2', _testing_coroutine('arg', test1='kwarg')) == "Ok!"
+
+        assert await cache(_testing_coroutine('arg', test1='kwarg')) == 'Ok!'

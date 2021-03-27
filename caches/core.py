@@ -1,6 +1,8 @@
 from types import TracebackType
-from typing import Any, Dict, Iterable, Mapping, Optional, Type, Union
+from typing import Any, Awaitable, Coroutine, Dict, Iterable, Mapping, Optional, Type, Union
 from urllib.parse import SplitResult, parse_qsl, urlsplit
+
+import json
 
 from .importer import import_from_string
 from .types import Serializable, Version
@@ -66,6 +68,27 @@ class Cache:
         await self._backend.disconnect()
         self.is_connected = False
 
+    async def __call__(self, coroutine: Coroutine, ttl: Optional[int] = None) -> Any:
+        """Cached coroutine call by itself.
+
+        Example:
+            >>> async def my_coroutine(*args, **kwargs):
+            >>>   pass
+            >>>
+            >>> async with Cache("locmem://") as cache:
+            >>>   await cache(my_coroutine('arg', test1='kwarg')
+
+        Args:
+            coroutine (Coroutine): Coroutine that you can cache
+            ttl (int): TTL of the cached value
+
+        Returns:
+            Any: Return value of the coroutine.
+        """
+        key = await self._get_key_from_coroutine(coroutine)
+
+        return await self.get_or_set(key, coroutine, ttl=ttl)
+
     async def __aenter__(self) -> "Cache":
         await self.connect()
         return self
@@ -129,7 +152,7 @@ class Cache:
     async def get_or_set(
         self,
         key: str,
-        default: Serializable,
+        default: Union[Awaitable, Serializable],
         *,
         ttl: Optional[int] = None,
         version: Optional[Version] = None,
@@ -200,6 +223,25 @@ class Cache:
         """Decreases key value in cache by delta. Defaults to '1'."""
         key_ = self.make_key(key, version)
         return await self._backend.decr(key_, delta)
+
+    async def _get_key_from_coroutine(self, coroutine: Coroutine) -> str:
+        """Gets key from coroutine name and its arguments.
+
+        Args:
+            coroutine (Coroutine)
+
+        Returns:
+            str: Key in string.
+        """
+        frame = coroutine.cr_frame
+
+        coroutine_name = coroutine.__qualname__
+        coroutine_arguments = frame.f_locals
+
+        args = [arg for arg in coroutine_arguments.get('args', [])]
+        kwargs = coroutine_arguments.get('kwds')
+
+        return self.make_key(json.dumps([coroutine_name, args, kwargs]))
 
 
 class CacheURL:
