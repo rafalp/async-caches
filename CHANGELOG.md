@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4 (28.3.2021)
+
+- Updated backends - Serialization/Deserialization of values moved to one point
+- Updated backends - Implementation of PEP 3119
+- Updated backends - Fix cache.get_or_set called with coroutine
+- Updated core - Add caching coroutine easily by `__call__()`
+
 ## 0.3 (15.08.2019)
 
 - Renamed `timeout` to `ttl`.
