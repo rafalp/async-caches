@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Any, Dict, Iterable, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, Iterable, Mapping, Optional, Union
 
 import json
 
@@ -34,7 +34,7 @@ class BaseBackend(metaclass=ABCMeta):
 
     @abstractmethod
     async def get_or_set(
-        self, key: str, default: Serializable, *, ttl: Optional[int]
+        self, key: str, default: Union[Awaitable, Serializable], *, ttl: Optional[int]
     ) -> Any:
         raise NotImplementedError()
 

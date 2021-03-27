@@ -1,5 +1,5 @@
 from inspect import isawaitable
-from typing import Any, Dict, Iterable, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, Iterable, Mapping, Optional, Union
 
 from ..types import Serializable
 from .base import BaseBackend
@@ -37,14 +37,14 @@ class DummyBackend(BaseBackend):
     async def get_or_set(
         self,
         key: str,
-        default: Serializable,
+        default: Union[Awaitable, Serializable],
         *,
         ttl: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:
         if callable(default):
             default = default()
-            if isawaitable(default):
-                default = await default
+        if isawaitable(default):
+            default = await default
             self._serialize(default)
         return default
 

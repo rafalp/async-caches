@@ -1,6 +1,6 @@
 from inspect import isawaitable
 from time import time
-from typing import Any, Dict, Iterable, Mapping, Optional, Tuple, Union
+from typing import Any, Awaitable, Dict, Iterable, Mapping, Optional, Tuple, Union
 
 from ..types import Serializable
 from .base import BaseBackend
@@ -41,14 +41,14 @@ class LocMemBackend(BaseBackend):
         return False
 
     async def get_or_set(
-        self, key: str, default: Serializable, *, ttl: Optional[int]
+        self, key: str, default: Union[Awaitable, Serializable], *, ttl: Optional[int]
     ) -> Any:
         value = await self.get(key, None)
         if value is None:
             if callable(default):
                 default = default()
-                if isawaitable(default):
-                    default = await default
+            if isawaitable(default):
+                default = await default
             await self.set(key, default, ttl=ttl)
             return default
         return value
