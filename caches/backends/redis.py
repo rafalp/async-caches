@@ -1,5 +1,4 @@
 import asyncio
-import json
 from inspect import isawaitable
 from typing import Any, Dict, Iterable, Mapping, Optional, Union
 
@@ -50,20 +49,20 @@ class RedisBackend(BaseBackend):
 
     async def get(self, key: str, default: Any) -> Any:
         value = await self._pool.execute("GET", key)
-        return json.loads(value) if value is not None else default
+        return self._deserialize(value) if value is not None else default
 
     async def set(self, key: str, value: Serializable, *, ttl: Optional[int]) -> Any:
         if ttl is None:
-            await self._pool.execute("SET", key, json.dumps(value))
+            await self._pool.execute("SET", key, self._serialize(value))
         elif ttl:
-            await self._pool.execute("SETEX", key, ttl, json.dumps(value))
+            await self._pool.execute("SETEX", key, ttl, self._serialize(value))
 
     async def add(self, key: str, value: Serializable, *, ttl: Optional[int]):
         if ttl is None:
-            return bool(await self._pool.execute("SET", key, json.dumps(value), "NX"))
+            return bool(await self._pool.execute("SET", key, self._serialize(value), "NX"))
 
         return bool(
-            await self._pool.execute("SET", key, json.dumps(value), "EX", ttl, "NX")
+            await self._pool.execute("SET", key, self._serialize(value), "EX", ttl, "NX")
         )
 
     async def get_or_set(
@@ -82,7 +81,7 @@ class RedisBackend(BaseBackend):
     async def get_many(self, keys: Iterable[str]) -> Dict[str, Any]:
         values = await self._pool.execute("MGET", *keys)
         return {
-            key: json.loads(values[i]) if values[i] is not None else None
+            key: self._deserialize(values[i]) if values[i] is not None else None
             for i, key in enumerate(keys)
         }
 
@@ -93,7 +92,7 @@ class RedisBackend(BaseBackend):
             values = []
             for key, value in mapping.items():
                 values.append(key)
-                values.append(json.dumps(value))
+                values.append(self._serialize(value))
             await self._pool.execute("MSET", *values)
         if ttl:
             expire = []
@@ -121,7 +120,7 @@ class RedisBackend(BaseBackend):
         if isinstance(delta, int):
             return await self._pool.execute("INCRBY", key, delta)
         if isinstance(delta, float):
-            return json.loads(await self._pool.execute("INCRBYFLOAT", key, delta))
+            return self._deserialize(await self._pool.execute("INCRBYFLOAT", key, delta))
         raise ValueError(f"incr value must be int or float")
 
     async def decr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
@@ -130,7 +129,7 @@ class RedisBackend(BaseBackend):
         if isinstance(delta, int):
             return await self._pool.execute("INCRBY", key, delta * -1)
         if isinstance(delta, float):
-            return json.loads(
+            return self._deserialize(
                 await self._pool.execute("INCRBYFLOAT", key, delta * -1.0)
             )
         raise ValueError(f"decr value must be int or float")
