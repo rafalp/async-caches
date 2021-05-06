@@ -34,7 +34,7 @@ class BaseBackend(metaclass=ABCMeta):
 
     @abstractmethod
     async def get_or_set(
-        self, key: str, default: Union[Awaitable, Serializable], *, ttl: Optional[int]
+        self, key: str, default: Union[Awaitable[Serializable], Serializable], *, ttl: Optional[int]
     ) -> Any:
         raise NotImplementedError()
 

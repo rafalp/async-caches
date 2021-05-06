@@ -41,7 +41,7 @@ class LocMemBackend(BaseBackend):
         return False
 
     async def get_or_set(
-        self, key: str, default: Union[Awaitable, Serializable], *, ttl: Optional[int]
+        self, key: str, default: Union[Awaitable[Serializable], Serializable], *, ttl: Optional[int]
     ) -> Any:
         value = await self.get(key, None)
         if value is None:

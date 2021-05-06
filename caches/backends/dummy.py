@@ -37,7 +37,7 @@ class DummyBackend(BaseBackend):
     async def get_or_set(
         self,
         key: str,
-        default: Union[Awaitable, Serializable],
+        default: Union[Awaitable[Serializable], Serializable],
         *,
         ttl: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:

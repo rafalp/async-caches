@@ -152,7 +152,7 @@ class Cache:
     async def get_or_set(
         self,
         key: str,
-        default: Union[Awaitable, Serializable],
+        default: Union[Awaitable[Serializable], Serializable],
         *,
         ttl: Optional[int] = None,
         version: Optional[Version] = None,
