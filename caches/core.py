@@ -1,8 +1,7 @@
+import json
 from types import TracebackType
 from typing import Any, Awaitable, Coroutine, Dict, Iterable, Mapping, Optional, Type, Union
 from urllib.parse import SplitResult, parse_qsl, urlsplit
-
-import json
 
 from .importer import import_from_string
 from .types import Serializable, Version

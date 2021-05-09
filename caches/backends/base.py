@@ -1,7 +1,6 @@
+import json
 from abc import ABCMeta, abstractmethod
 from typing import Any, Awaitable, Dict, Iterable, Mapping, Optional, Union
-
-import json
 
 from ..core import CacheURL
 from ..types import Serializable
