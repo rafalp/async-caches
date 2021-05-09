@@ -1,6 +1,5 @@
-import json
 from inspect import isawaitable
-from typing import Any, Dict, Iterable, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, Iterable, Mapping, Optional, Union
 
 from ..types import Serializable
 from .base import BaseBackend
@@ -23,7 +22,7 @@ class DummyBackend(BaseBackend):
         *,
         ttl: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:
-        json.dumps(value)
+        self._serialize(value)
 
     async def add(
         self,
@@ -32,21 +31,21 @@ class DummyBackend(BaseBackend):
         *,
         ttl: Optional[int],  # pylint: disable=unused-argument
     ) -> bool:
-        json.dumps(value)
+        self._serialize(value)
         return False
 
     async def get_or_set(
         self,
         key: str,
-        default: Serializable,
+        default: Union[Awaitable[Serializable], Serializable],
         *,
         ttl: Optional[int],  # pylint: disable=unused-argument
     ) -> Any:
         if callable(default):
             default = default()
-            if isawaitable(default):
-                default = await default
-            json.dumps(default)
+        if isawaitable(default):
+            default = await default
+            self._serialize(default)
         return default
 
     async def get_many(self, keys: Iterable[str]) -> Dict[str, Any]:
@@ -59,7 +58,7 @@ class DummyBackend(BaseBackend):
         ttl: Optional[int],  # pylint: disable=unused-argument
     ):
         for value in mapping.values():
-            json.dumps(value)
+            self._serialize(value)
 
     async def delete(self, key: str):
         pass

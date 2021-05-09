@@ -1,7 +1,6 @@
-import json
 from inspect import isawaitable
 from time import time
-from typing import Any, Dict, Iterable, Mapping, Optional, Tuple, Union
+from typing import Any, Awaitable, Dict, Iterable, Mapping, Optional, Tuple, Union
 
 from ..types import Serializable
 from .base import BaseBackend
@@ -28,12 +27,12 @@ class LocMemBackend(BaseBackend):
         if ttl and ttl < time():
             return default
 
-        return json.loads(value)
+        return self._deserialize(value)
 
     async def set(self, key: str, value: Serializable, *, ttl: Optional[int]) -> Any:
         if ttl is not None:
             ttl += int(time())
-        self._caches[self._id][key] = json.dumps(value), ttl
+        self._caches[self._id][key] = self._serialize(value), ttl
 
     async def add(self, key: str, value: Serializable, *, ttl: Optional[int]) -> bool:
         if key not in self._caches[self._id]:
@@ -42,14 +41,14 @@ class LocMemBackend(BaseBackend):
         return False
 
     async def get_or_set(
-        self, key: str, default: Serializable, *, ttl: Optional[int]
+        self, key: str, default: Union[Awaitable[Serializable], Serializable], *, ttl: Optional[int]
     ) -> Any:
         value = await self.get(key, None)
         if value is None:
             if callable(default):
                 default = default()
-                if isawaitable(default):
-                    default = await default
+            if isawaitable(default):
+                default = await default
             await self.set(key, default, ttl=ttl)
             return default
         return value
@@ -90,8 +89,8 @@ class LocMemBackend(BaseBackend):
             raise ValueError(f"incr value must be int or float")
 
         value, ttl = self._caches[self._id][key]
-        value = json.loads(value) + delta
-        self._caches[self._id][key] = json.dumps(value), ttl
+        value = self._deserialize(value) + delta
+        self._caches[self._id][key] = self._serialize(value), ttl
         return value
 
     async def decr(self, key: str, delta: Union[float, int]) -> Union[float, int]:
@@ -101,6 +100,6 @@ class LocMemBackend(BaseBackend):
             raise ValueError(f"decr value must be int or float")
 
         value, ttl = self._caches[self._id][key]
-        value = json.loads(value) - delta
-        self._caches[self._id][key] = json.dumps(value), ttl
+        value = self._deserialize(value) - delta
+        self._caches[self._id][key] = self._serialize(value), ttl
         return value

@@ -150,7 +150,7 @@ Returns `True` if key was added to cache and `False` if it already exists.
 ### `get_or_set`
 
 ```python
-await cache.get_or_set(key: str, default: Serializable, *, ttl: Optional[int] = None, version: Optional[Version] = None) -> Any
+await cache.get_or_set(key: str, default: Union[Awaitable, Serializable], *, ttl: Optional[int] = None, version: Optional[Version] = None) -> Any
 ```
 
 Gets value for key from the cache. If key doesn't exist or has expired, new key is set with `default` value.

@@ -8,6 +8,10 @@ def cache():
     return Cache("dummy://null")
 
 
+async def _testing_coroutine(test, test1='test'):
+    return 'Ok!'
+
+
 def test_cache_created_key_includes_app_key(cache):
     key = cache.make_key("test")
     assert "test" in key
@@ -117,3 +121,7 @@ async def test_cache_can_be_used_as_context_manager():
     async with Cache("locmem://") as cache:
         await cache.set("test", "Ok!")
         assert await cache.get("test") == "Ok!"
+
+        assert await cache.get_or_set('test2', _testing_coroutine('arg', test1='kwarg')) == "Ok!"
+
+        assert await cache(_testing_coroutine('arg', test1='kwarg')) == 'Ok!'
