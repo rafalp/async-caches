@@ -12,6 +12,7 @@ class Cache:
         "dummy": "caches.backends.dummy:DummyBackend",
         "locmem": "caches.backends.locmem:LocMemBackend",
         "redis": "caches.backends.redis:RedisBackend",
+        "rediss": "caches.backends.redis:RedisBackend",
     }
 
     def __init__(
@@ -42,7 +43,7 @@ class Cache:
         self.options = options
         self.is_connected = False
 
-        assert self.url.backend in self.SUPPORTED_BACKENDS, "Invalid backend."
+        assert self.url.backend in self.SUPPORTED_BACKENDS, f"Invalid backend {self.url.backend}."
         backend_str = self.SUPPORTED_BACKENDS[self.url.backend]
         backend_cls = import_from_string(backend_str)
 
