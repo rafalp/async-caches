@@ -16,7 +16,7 @@ attrs==19.1.0
     #   pytest
 black==19.3b0
     # via -r requirements-dev.in
-certifi==2019.6.16
+certifi==2022.12.7
     # via requests
 chardet==3.0.4
     # via requests
@@ -44,10 +44,10 @@ mccabe==0.6.1
     # via pylint
 more-itertools==7.1.0
     # via pytest
-mypy-extensions==0.4.1
-    # via mypy
 mypy==0.720
     # via -r requirements-dev.in
+mypy-extensions==0.4.1
+    # via mypy
 packaging==19.0
     # via pytest
 pip-tools==3.8.0
@@ -60,15 +60,15 @@ pylint==2.3.1
     # via -r requirements-dev.in
 pyparsing==2.4.0
     # via packaging
-pytest-asyncio==0.10.0
-    # via -r requirements-dev.in
-pytest-cov==2.7.1
-    # via -r requirements-dev.in
 pytest==5.0.1
     # via
     #   -r requirements-dev.in
     #   pytest-asyncio
     #   pytest-cov
+pytest-asyncio==0.10.0
+    # via -r requirements-dev.in
+pytest-cov==2.7.1
+    # via -r requirements-dev.in
 requests==2.22.0
     # via codecov
 six==1.12.0
